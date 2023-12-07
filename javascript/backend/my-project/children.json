@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Lou Beranger",
+    "age": 1,
+    "address": {
+      "number": 40,
+      "street": "Impasse d'antant",
+      "city": "Bourg-en-Vol"
+    },
+    "diplomas": [],
+    "hasCar": false
+  }
+]

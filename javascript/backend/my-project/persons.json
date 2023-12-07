@@ -1,0 +1,83 @@
+[
+  {
+    "name": "Jean-Claude Machin",
+    "age": 23,
+    "address": {
+      "number": 12,
+      "street": "Rue des choses",
+      "city": "Villiers-sur-Truc"
+    },
+    "diplomas": [
+      "Brevet des colleges",
+      "Baccalaureat",
+      "BTS"
+    ],
+    "hasCar": true
+  },
+  {
+    "name": "Maxence Bekier",
+    "age": 22,
+    "address": {
+      "number": 18,
+      "street": "Rue du Poirier Machon",
+      "city": "Vélizey"
+    },
+    "diplomas": [
+      "Brevet des colleges",
+      "Baccalaureat"
+    ],
+    "hasCar": false
+  },
+  {
+    "name": "Sara Lonardi",
+    "age": 21,
+    "address": {
+      "number": 19,
+      "street": "Rue d'empoigne",
+      "city": "Sannois"
+    },
+    "diplomas": [
+      "Brevet des colleges"
+    ],
+    "hasCar": false
+  },
+  {
+    "name": "Nathael Bekier",
+    "age": 19,
+    "address": {
+      "number": 18,
+      "street": "Rue du Poirier Machon",
+      "city": "Vélizey"
+    },
+    "diplomas": [
+      "Brevet des colleges"
+    ],
+    "hasCar": true
+  },
+  {
+    "name": "Severine Bekier",
+    "age": 52,
+    "address": {
+      "number": 18,
+      "street": "Rue du Poirier Machon",
+      "city": "Vélizey"
+    },
+    "diplomas": [
+      "Brevet des colleges",
+      "Baccalaureat",
+      "Master"
+    ],
+    "hasCar": true
+  },
+  {
+    "name": "Lou Beranger",
+    "age": 1,
+    "address": {
+      "number": 40,
+      "street": "Impasse d'antant",
+      "city": "Bourg-en-Vol"
+    },
+    "diplomas": [],
+    "hasCar": false
+  }
+]
