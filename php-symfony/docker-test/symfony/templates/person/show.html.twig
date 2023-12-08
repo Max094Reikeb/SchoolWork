@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ person.firstName }} {{ person.lastName }}{% endblock %}
+
+{% block body %}
+    <h1>{{ person.firstName }} {{ person.lastName }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ person.id }}</td>
+            </tr>
+            <tr>
+                <th>Prénom</th>
+                <td>{{ person.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Nom de famille</th>
+                <td>{{ person.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Commandes</th>
+                <td>
+                    <div class="accordion" id="accordionExample">
+                        {% for command in person.commands %}
+                        <a href="{{ path('app_command_show', {'id': person.id, 'id2': command.id}) }}">Détails</a> | <a href="{{ path('app_command_edit', {'id': person.id, 'id2': command.id}) }}">Modifier</a>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#command{{ command.id }}" aria-expanded="true" aria-controls="command{{ command.id }}">
+                                    {{ command.getRestaurant().name }} - {{ command.totalAmount|number_format(2, '.', ',') }}€
+                                </button>
+                            </h2>
+                            <div id="command{{ command.id }}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    {% for product in command.products %}
+                                        {{ product.name }} - {{ product.price|number_format(2, '.', ',') }}€<br />
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_person_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('app_person_edit', {'id': person.id}) }}">Modifier</a>
+
+    {{ include('person/_delete_form.html.twig') }}
+{% endblock %}

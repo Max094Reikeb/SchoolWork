@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Account{% endblock %}
+
+{% block body %}
+    <h1>Account</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ account.id }}</td>
+            </tr>
+            <tr>
+                <th>Owner</th>
+                <td>{{ account.owner.firstName }} {{ account.owner.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ account.type.value }}</td>
+            </tr>
+            <tr>
+                <th>Iban</th>
+                <td>{{ account.iban }}</td>
+            </tr>
+            <tr>
+                <th>Balance</th>
+                <td>{{ account.balance }}</td>
+            </tr>
+            <tr>
+                <th>Min Balance</th>
+                <td>{{ account.minBalance }}</td>
+            </tr>
+            <tr>
+                <th>Transactions</th>
+                <td>{{ account.formatAllTransactionsForDisplay|raw }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_account_index') }}">Back to list</a>
+
+    <a href="{{ path('app_account_edit', {'id': account.id}) }}">Edit</a>
+
+    {{ include('account/_delete_form.html.twig') }}
+{% endblock %}

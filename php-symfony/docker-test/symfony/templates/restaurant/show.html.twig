@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Restaurant {{ restaurant.name }}{% endblock %}
+
+{% block body %}
+    <h1>Restaurant {{ restaurant.name }} - {{ restaurant.type.value }} ({{ restaurant.address.street }}, {{ restaurant.address.city }} {{ restaurant.address.postalCode }})</h1>
+    <h3>Chiffre d'affaire actuel : {{ sales }}€ ({{ commandsCount }} commandes)</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in restaurant.products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}€</td>
+                <td>
+                    <a href="{{ path('app_product_show', {'id': restaurant.id, 'id2': product.id}) }}">Détails</a>
+                    <a href="{{ path('app_product_edit', {'id': restaurant.id, 'id2': product.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun produit dans ce restaurant</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_restaurant_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('app_restaurant_edit', {'id': restaurant.id}) }}">Modifier</a>
+
+    <a href="{{ path('app_product_new', {'id': restaurant.id}) }}">Ajouter un produit</a>
+
+    <a href="{{ path('app_command_new', {'id': restaurant.id}) }}">Nouvelle commande</a>
+
+    {{ include('restaurant/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+<div>
+    <label for="{{ form.owner.vars.id }}">{{ form.owner.vars.label }}</label>
+    {{ form_widget(form.owner) }}
+    {{ form_errors(form.owner) }}
+</div>
+<div>
+    <label for="{{ form.products.vars.id }}">{{ form.products.vars.label }}</label>
+    {{ form_widget(form.products) }}
+    {{ form_errors(form.products) }}
+</div>
+<button type="submit">{{ button_label|default('Sauvegarder') }}</button>
+{{ form_end(form) }}

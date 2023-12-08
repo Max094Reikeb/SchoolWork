@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la commande{% endblock %}
+
+{% block body %}
+    <h1>Détails de la commande de {{ person.firstName }} {{ person.lastName }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ command.id }}</td>
+            </tr>
+            <tr>
+                <th>Restaurant</th>
+                <td>{{ command.getRestaurant().name }}</td>
+            </tr>
+            <tr>
+                <th>Montant total</th>
+                <td>{{ command.totalAmount|number_format(2, '.', ',') }}€</td>
+            </tr>
+            <tr>
+                <th>Produits</th>
+                <td>
+                    <ul>
+                        {% for product in command.products %}
+                            <li>{{ product.name }} - {{ product.price|number_format(2, '.', ',') }}€</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_person_show', {'id': person.id}) }}">Retour à la liste</a>
+
+    <a href="{{ path('app_command_edit', {'id': person.id, 'id2': command.id}) }}">Modifier</a>
+{% endblock %}

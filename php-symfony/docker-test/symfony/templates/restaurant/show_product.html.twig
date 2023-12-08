@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+    <h1>Produit - {{ product.name }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ product.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ product.price }}€</td>
+            </tr>
+            <tr>
+                <th>Restaurant lié</th>
+                <td>{{ product.restaurant.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_restaurant_show', {'id': restaurant.id}) }}">Retour à la liste</a>
+
+    <a href="{{ path('app_product_edit', {'id': restaurant.id, 'id2': product.id}) }}">Modifier</a>
+
+    {{ include('restaurant/_delete_product_form.html.twig') }}
+{% endblock %}
