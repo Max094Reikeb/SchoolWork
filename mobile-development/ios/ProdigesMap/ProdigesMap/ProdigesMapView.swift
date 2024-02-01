@@ -14,7 +14,9 @@ struct ProdigesMapView: View {
         let model = ProdigesModel.shared
         @State var position = MKCoordinateRegion(center: model.center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         Map(initialPosition: MapCameraPosition.region(position)) {
-            UserAnnotation()
+            UserAnnotation() {
+                Text("\(model.name)")
+            }
         }
     }
 }
