@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		F92C20AD2B6BF66A003D81EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F92C20AC2B6BF66A003D81EC /* GoogleService-Info.plist */; };
-		F92C20B02B6BF6C6003D81EC /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = F92C20AF2B6BF6C6003D81EC /* Algorithms */; };
-		F92C20B22B6BF6FF003D81EC /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = F92C20B12B6BF6FF003D81EC /* Algorithms */; };
 		F92C20B52B6BF738003D81EC /* AsyncAlgorithms in Frameworks */ = {isa = PBXBuildFile; productRef = F92C20B42B6BF738003D81EC /* AsyncAlgorithms */; };
 		F92C20B82B6BF831003D81EC /* AsyncExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = F92C20B72B6BF831003D81EC /* AsyncExtensions */; };
 		F92C20BB2B6BF8A8003D81EC /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F92C20BA2B6BF8A8003D81EC /* FirebaseAnalytics */; };
@@ -40,6 +38,8 @@
 		F9A0640B2B6A82C1001E24BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9A0640A2B6A82C1001E24BF /* Preview Assets.xcassets */; };
 		F9A064122B6A83F5001E24BF /* ProdigesMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A064112B6A83F5001E24BF /* ProdigesMapView.swift */; };
 		F9A064142B6A9090001E24BF /* ProdigesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A064132B6A9090001E24BF /* ProdigesModel.swift */; };
+		F9BE524E2B6CE42B00781072 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BE524D2B6CE42B00781072 /* AppDelegate.swift */; };
+		F9BE52502B6CFCA100781072 /* Prodige.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BE524F2B6CFCA100781072 /* Prodige.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +51,8 @@
 		F9A0640A2B6A82C1001E24BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F9A064112B6A83F5001E24BF /* ProdigesMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdigesMapView.swift; sourceTree = "<group>"; };
 		F9A064132B6A9090001E24BF /* ProdigesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdigesModel.swift; sourceTree = "<group>"; };
+		F9BE524D2B6CE42B00781072 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F9BE524F2B6CFCA100781072 /* Prodige.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prodige.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +61,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F92C20CF2B6BF8A8003D81EC /* FirebaseDatabaseSwift in Frameworks */,
-				F92C20B22B6BF6FF003D81EC /* Algorithms in Frameworks */,
 				F92C20BD2B6BF8A8003D81EC /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				F92C20E12B6BF8A8003D81EC /* FirebaseInstallations in Frameworks */,
 				F92C20D52B6BF8A8003D81EC /* FirebaseFirestoreCombine-Community in Frameworks */,
@@ -70,7 +71,6 @@
 				F92C20D72B6BF8A8003D81EC /* FirebaseFirestoreSwift in Frameworks */,
 				F92C20D32B6BF8A8003D81EC /* FirebaseFirestore in Frameworks */,
 				F92C20D92B6BF8A8003D81EC /* FirebaseFunctions in Frameworks */,
-				F92C20B02B6BF6C6003D81EC /* Algorithms in Frameworks */,
 				F92C20BF2B6BF8A8003D81EC /* FirebaseAnalyticsSwift in Frameworks */,
 				F92C20BB2B6BF8A8003D81EC /* FirebaseAnalytics in Frameworks */,
 				F92C20B52B6BF738003D81EC /* AsyncAlgorithms in Frameworks */,
@@ -109,11 +109,11 @@
 		F9A064022B6A82C0001E24BF /* ProdigesMap */ = {
 			isa = PBXGroup;
 			children = (
-				F92C20AC2B6BF66A003D81EC /* GoogleService-Info.plist */,
+				F9BE524D2B6CE42B00781072 /* AppDelegate.swift */,
+				F9BE52532B6CFD7B00781072 /* Models */,
+				F9BE52512B6CFD6300781072 /* Views */,
 				F9A064032B6A82C0001E24BF /* ProdigesMapApp.swift */,
-				F9A064052B6A82C0001E24BF /* ContentView.swift */,
-				F9A064112B6A83F5001E24BF /* ProdigesMapView.swift */,
-				F9A064132B6A9090001E24BF /* ProdigesModel.swift */,
+				F92C20AC2B6BF66A003D81EC /* GoogleService-Info.plist */,
 				F9A064072B6A82C1001E24BF /* Assets.xcassets */,
 				F9A064092B6A82C1001E24BF /* Preview Content */,
 			);
@@ -126,6 +126,24 @@
 				F9A0640A2B6A82C1001E24BF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F9BE52512B6CFD6300781072 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F9A064052B6A82C0001E24BF /* ContentView.swift */,
+				F9A064112B6A83F5001E24BF /* ProdigesMapView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F9BE52532B6CFD7B00781072 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F9BE524F2B6CFCA100781072 /* Prodige.swift */,
+				F9A064132B6A9090001E24BF /* ProdigesModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,8 +163,6 @@
 			);
 			name = ProdigesMap;
 			packageProductDependencies = (
-				F92C20AF2B6BF6C6003D81EC /* Algorithms */,
-				F92C20B12B6BF6FF003D81EC /* Algorithms */,
 				F92C20B42B6BF738003D81EC /* AsyncAlgorithms */,
 				F92C20B72B6BF831003D81EC /* AsyncExtensions */,
 				F92C20BA2B6BF8A8003D81EC /* FirebaseAnalytics */,
@@ -201,7 +217,6 @@
 			);
 			mainGroup = F9A063F72B6A82C0001E24BF;
 			packageReferences = (
-				F92C20AE2B6BF6C6003D81EC /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 				F92C20B32B6BF738003D81EC /* XCRemoteSwiftPackageReference "swift-async-algorithms" */,
 				F92C20B62B6BF831003D81EC /* XCRemoteSwiftPackageReference "AsyncExtensions" */,
 				F92C20B92B6BF8A8003D81EC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
@@ -233,9 +248,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9BE52502B6CFCA100781072 /* Prodige.swift in Sources */,
 				F9A064142B6A9090001E24BF /* ProdigesModel.swift in Sources */,
 				F9A064062B6A82C0001E24BF /* ContentView.swift in Sources */,
 				F9A064042B6A82C0001E24BF /* ProdigesMapApp.swift in Sources */,
+				F9BE524E2B6CE42B00781072 /* AppDelegate.swift in Sources */,
 				F9A064122B6A83F5001E24BF /* ProdigesMapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,14 +463,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F92C20AE2B6BF6C6003D81EC /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-algorithms.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
-			};
-		};
 		F92C20B32B6BF738003D81EC /* XCRemoteSwiftPackageReference "swift-async-algorithms" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-async-algorithms.git";
@@ -481,16 +490,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F92C20AF2B6BF6C6003D81EC /* Algorithms */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F92C20AE2B6BF6C6003D81EC /* XCRemoteSwiftPackageReference "swift-algorithms" */;
-			productName = Algorithms;
-		};
-		F92C20B12B6BF6FF003D81EC /* Algorithms */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F92C20AE2B6BF6C6003D81EC /* XCRemoteSwiftPackageReference "swift-algorithms" */;
-			productName = Algorithms;
-		};
 		F92C20B42B6BF738003D81EC /* AsyncAlgorithms */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F92C20B32B6BF738003D81EC /* XCRemoteSwiftPackageReference "swift-async-algorithms" */;

@@ -8,6 +8,7 @@
 import AsyncAlgorithms
 import AsyncExtensions
 import CoreLocation
+import Firebase
 import Foundation
 import SwiftUI
 
@@ -25,6 +26,8 @@ class ProdigesModel: NSObject {
         
         manager.delegate = self
         manager.requestWhenInUseAuthorization()
+        
+        trackProdiges()
     }
 }
 
@@ -65,5 +68,20 @@ extension ProdigesModel: CLLocationManagerDelegate {
                 }
             }
         }
+    }
+}
+
+extension ProdigesModel {
+    func trackProdiges() {
+        let db = Firestore.firestore()
+        db.collection("prodiges").whereField("tracked", isEqualTo: true)
+            .addSnapshotListener { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+                let prodiges = documents.compactMap { $0["name"] }
+                print("Tracked Prodiges: \(prodiges)")
+            }
     }
 }
