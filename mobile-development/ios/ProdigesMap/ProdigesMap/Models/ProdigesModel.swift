@@ -15,8 +15,10 @@ import SwiftUI
 @Observable
 class ProdigesModel: NSObject {
     var name = "User"
+    var prodiges = [Prodige]()
     var initialEvent: CLMonitor.Event?
     
+    let prodigesCollection = Firestore.firestore().collection("prodiges")
     static let shared = ProdigesModel()
     let center = CLLocationCoordinate2D(latitude: 48.9355351, longitude: 2.3030026)
     private let manager = CLLocationManager()
@@ -73,15 +75,35 @@ extension ProdigesModel: CLLocationManagerDelegate {
 
 extension ProdigesModel {
     func trackProdiges() {
-        let db = Firestore.firestore()
-        db.collection("prodiges").whereField("tracked", isEqualTo: true)
+        prodigesCollection.whereField("tracked", isEqualTo: true)
             .addSnapshotListener { querySnapshot, error in
                 guard let documents = querySnapshot?.documents else {
                     print("Error fetching documents: \(error!)")
                     return
                 }
-                let prodiges = documents.compactMap { $0["name"] }
-                print("Tracked Prodiges: \(prodiges)")
+                do {
+                    self.prodiges = try documents.compactMap { try $0.data(as: Prodige.self) }
+                } catch {
+                    print("Error deserializing documents: \(error)")
+                }
+                print("Tracked Prodiges: \(self.prodiges)")
             }
+    }
+    
+    func locationUpdates() {
+        Task {
+            let updates = CLLocationUpdate.liveUpdates()
+            for try await update in updates {
+                if let location = update.location {
+                    print(location)
+                    let position = GeoPoint(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                    updateProdige(id: "", values: ["position": position])
+                }
+            }
+        }
+    }
+    
+    func updateProdige(id: String, values: [AnyHashable: Any]) {
+        prodigesCollection.document(id).updateData(values)
     }
 }

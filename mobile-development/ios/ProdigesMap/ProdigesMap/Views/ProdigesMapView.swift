@@ -10,14 +10,40 @@ import MapKit
 import SwiftUI
 
 struct ProdigesMapView: View {
+    @State var newUserPresented = false
     var body: some View {
-        let model = ProdigesModel.shared
-        @State var position = MKCoordinateRegion(center: model.center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        Map(initialPosition: MapCameraPosition.region(position)) {
-            UserAnnotation() {
-                Text("\(model.name)")
+        NavigationView {
+            let model = ProdigesModel.shared
+            @State var position = MKCoordinateRegion(center: model.center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            ZStack(alignment: .bottomTrailing) {
+                Map(initialPosition: MapCameraPosition.region(position)) {
+                    ForEach(model.prodiges) { prodige in
+                        Marker(prodige.name, systemImage: "person.circle", coordinate: CLLocationCoordinate2D(latitude: prodige.position.latitude, longitude: prodige.position.longitude))
+                    }
+                }
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            newUserPresented.toggle()
+                        }) {
+                            Image(systemName: "plus.circle.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 60, height: 60)
+                                .foregroundColor(.blue)
+                                .background(Color.white)
+                                .clipShape(Circle())
+                                .padding(.trailing)
+                                .padding(.top)
+                        }
+                    }
+                }
             }
         }
+        .navigationViewStyle(.stack)
+        .sheet(isPresented: $newUserPresented ) { SelectNameView(isVisible: $newUserPresented) }
     }
 }
 
