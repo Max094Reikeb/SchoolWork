@@ -1,0 +1,50 @@
+BoxLayout:
+    orientation: 'vertical'
+    BoxLayout:
+        orientation: 'horizontal'
+        BoxLayout:
+            orientation: 'vertical'
+            FileChooserListView:
+                id: filechooser
+                filters: ['*.mp3', '*.flac']
+                on_selection: app.display_metadata(self.selection)
+            Button:
+                text: 'Sélectionner un dossier'
+                on_press: filechooser.path = filechooser.file_system.choose_dir()[0]
+        BoxLayout:
+            orientation: 'vertical'
+            AsyncImage:
+                id: cover_art
+                size_hint_y: 0.6
+            ScrollView:
+                Label:
+                    id: metadata_text
+                    text: ''
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    padding: 10, 10
+                    valign: 'top'
+        BoxLayout:
+            orientation: 'vertical'
+            FileChooserListView:
+                id: playlist_filechooser
+                filters: ['*.xspf']
+                on_selection: app.load_playlist(self.selection)
+            Button:
+                text: 'Nouvelle playlist'
+                on_press: app.create_new_playlist()
+            Button:
+                text: 'Ajouter à la playlist'
+                on_press: app.add_to_playlist()
+            Button:
+                text: 'Supprimer de la playlist'
+                on_press: app.remove_from_playlist()
+            Button:
+                text: 'Supprimer la playlist'
+                on_press: app.delete_playlist()
+        BoxLayout:
+            orientation: 'vertical'
+            TracksView:
+                id: playlist_tracks
+                on_select: app.display_track_metadata([1])
