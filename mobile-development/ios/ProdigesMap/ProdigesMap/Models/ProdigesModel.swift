@@ -7,6 +7,7 @@
 
 import AsyncAlgorithms
 import AsyncExtensions
+import Combine
 import CoreLocation
 import Firebase
 import Foundation
@@ -14,7 +15,7 @@ import SwiftUI
 
 @Observable
 class ProdigesModel: NSObject {
-    var name = "User"
+    var currentProdige: Prodige?
     var prodiges = [Prodige]()
     var trackedProdiges: [Prodige] { prodiges.filter(\.tracked) }
     var initialEvent: CLMonitor.Event?
@@ -29,6 +30,17 @@ class ProdigesModel: NSObject {
         
         manager.delegate = self
         manager.requestWhenInUseAuthorization()
+        
+        Task {
+            for await currentId in UserDefaults.standard.observeKey(at: \.currentProdige) {
+                switch currentId {
+                case .none: print("No current one!")
+                case .some(let currentID):
+                    let documentRef = prodigesCollection.document(currentID)
+                    currentProdige = try? await documentRef.getDocument(as: Prodige.self)
+                }
+            }
+        }
         
         trackProdiges()
     }
@@ -67,7 +79,7 @@ extension ProdigesModel: CLLocationManagerDelegate {
                     }
                 }
                 for try await stateString in stateStrings {
-                    name = stateString
+                    // name = stateString
                 }
             }
         }
@@ -77,27 +89,29 @@ extension ProdigesModel: CLLocationManagerDelegate {
 extension ProdigesModel {
     func trackProdiges() {
         prodigesCollection.addSnapshotListener { querySnapshot, error in
-                guard let documents = querySnapshot?.documents else {
-                    print("Error fetching documents: \(error!)")
-                    return
-                }
-                do {
-                    self.prodiges = try documents.compactMap { try $0.data(as: Prodige.self) }
-                } catch {
-                    print("Error deserializing documents: \(error)")
-                }
-                print("Tracked Prodiges: \(self.prodiges)")
+            guard let documents = querySnapshot?.documents else {
+                print("Error fetching documents: \(error!)")
+                return
             }
+            do {
+                self.prodiges = try documents.compactMap { try $0.data(as: Prodige.self) }
+            } catch {
+                print("Error deserializing documents: \(error)")
+            }
+            print("Tracked Prodiges: \(self.prodiges)")
+        }
     }
     
     func locationUpdates() {
         Task {
             let updates = CLLocationUpdate.liveUpdates()
             for try await update in updates {
-                if let location = update.location {
-                    print(location)
-                    let position = GeoPoint(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                    updateProdige(id: "", values: ["position": position])
+                if let loggedInProdigeId = currentProdige?.id {
+                    if let location = update.location {
+                        print(location)
+                        let position = GeoPoint(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                        updateProdige(id: loggedInProdigeId, values: ["position": position])
+                    }
                 }
             }
         }
@@ -105,5 +119,30 @@ extension ProdigesModel {
     
     func updateProdige(id: String, values: [AnyHashable: Any]) {
         prodigesCollection.document(id).updateData(values)
+    }
+}
+
+extension UserDefaults {
+    @objc dynamic var currentProdige: String? { string(forKey: "CurrentProdige" )}
+    
+    typealias AsyncValues<T> = AsyncPublisher<AnyPublisher<T, Never>>
+    func observeKey<T>(at path: KeyPath<UserDefaults, T>) -> AsyncValues<T> {
+        return self.publisher(for: path, options: [.initial, .new])
+            .eraseToAnyPublisher()
+            .values
+    }
+
+    func setId(_ id: String, forKey key: String) {
+        if let encoded = try? JSONEncoder().encode(id) {
+            set(encoded, forKey: key)
+        }
+    }
+
+    func getId(forKey key: String) -> String? {
+        if let data = data(forKey: key),
+           let id = try? JSONDecoder().decode(String.self, from: data) {
+            return id
+        }
+        return nil
     }
 }

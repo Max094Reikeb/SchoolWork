@@ -28,6 +28,16 @@ struct ProdigesMapView: View {
                     }
                 }
                 VStack {
+                    HStack {
+                        if let currentProdige = model.currentProdige {
+                            Text(currentProdige.name)
+                                .font(.largeTitle)
+                                .underline()
+                                .bold()
+                                .padding(.leading)
+                            Spacer()
+                        }
+                    }
                     Spacer()
                     HStack {
                         Spacer()
