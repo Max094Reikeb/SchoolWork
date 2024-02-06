@@ -10,14 +10,20 @@ import MapKit
 import SwiftUI
 
 struct ProdigesMapView: View {
+
+    let model = ProdigesModel.shared
     @State var newUserPresented = false
+    @State var position: MKCoordinateRegion
+
+    init() {
+        position = MKCoordinateRegion(center: model.center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+    }
+
     var body: some View {
         NavigationView {
-            let model = ProdigesModel.shared
-            @State var position = MKCoordinateRegion(center: model.center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
             ZStack(alignment: .bottomTrailing) {
                 Map(initialPosition: MapCameraPosition.region(position)) {
-                    ForEach(model.prodiges) { prodige in
+                    ForEach(model.trackedProdiges) { prodige in
                         Marker(prodige.name, systemImage: "person.circle", coordinate: CLLocationCoordinate2D(latitude: prodige.position.latitude, longitude: prodige.position.longitude))
                     }
                 }
@@ -43,7 +49,7 @@ struct ProdigesMapView: View {
             }
         }
         .navigationViewStyle(.stack)
-        .sheet(isPresented: $newUserPresented ) { SelectNameView(isVisible: $newUserPresented) }
+        .sheet(isPresented: $newUserPresented ) { LoginView() }
     }
 }
 

@@ -16,6 +16,7 @@ import SwiftUI
 class ProdigesModel: NSObject {
     var name = "User"
     var prodiges = [Prodige]()
+    var trackedProdiges: [Prodige] { prodiges.filter(\.tracked) }
     var initialEvent: CLMonitor.Event?
     
     let prodigesCollection = Firestore.firestore().collection("prodiges")
@@ -75,8 +76,7 @@ extension ProdigesModel: CLLocationManagerDelegate {
 
 extension ProdigesModel {
     func trackProdiges() {
-        prodigesCollection.whereField("tracked", isEqualTo: true)
-            .addSnapshotListener { querySnapshot, error in
+        prodigesCollection.addSnapshotListener { querySnapshot, error in
                 guard let documents = querySnapshot?.documents else {
                     print("Error fetching documents: \(error!)")
                     return

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F92843382B72324800022088 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92843372B72324800022088 /* LoginView.swift */; };
 		F92C20AD2B6BF66A003D81EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F92C20AC2B6BF66A003D81EC /* GoogleService-Info.plist */; };
 		F92C20B52B6BF738003D81EC /* AsyncAlgorithms in Frameworks */ = {isa = PBXBuildFile; productRef = F92C20B42B6BF738003D81EC /* AsyncAlgorithms */; };
 		F92C20B82B6BF831003D81EC /* AsyncExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = F92C20B72B6BF831003D81EC /* AsyncExtensions */; };
@@ -40,10 +41,10 @@
 		F9A064142B6A9090001E24BF /* ProdigesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A064132B6A9090001E24BF /* ProdigesModel.swift */; };
 		F9BE524E2B6CE42B00781072 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BE524D2B6CE42B00781072 /* AppDelegate.swift */; };
 		F9BE52502B6CFCA100781072 /* Prodige.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BE524F2B6CFCA100781072 /* Prodige.swift */; };
-		F9BE52552B6D457900781072 /* SelectNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BE52542B6D457900781072 /* SelectNameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F92843372B72324800022088 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F92C20AC2B6BF66A003D81EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F9A064002B6A82C0001E24BF /* ProdigesMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProdigesMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A064032B6A82C0001E24BF /* ProdigesMapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdigesMapApp.swift; sourceTree = "<group>"; };
@@ -54,7 +55,6 @@
 		F9A064132B6A9090001E24BF /* ProdigesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdigesModel.swift; sourceTree = "<group>"; };
 		F9BE524D2B6CE42B00781072 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9BE524F2B6CFCA100781072 /* Prodige.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prodige.swift; sourceTree = "<group>"; };
-		F9BE52542B6D457900781072 /* SelectNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +135,7 @@
 			children = (
 				F9A064052B6A82C0001E24BF /* ContentView.swift */,
 				F9A064112B6A83F5001E24BF /* ProdigesMapView.swift */,
-				F9BE52542B6D457900781072 /* SelectNameView.swift */,
+				F92843372B72324800022088 /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -257,7 +257,7 @@
 				F9A064042B6A82C0001E24BF /* ProdigesMapApp.swift in Sources */,
 				F9BE524E2B6CE42B00781072 /* AppDelegate.swift in Sources */,
 				F9A064122B6A83F5001E24BF /* ProdigesMapView.swift in Sources */,
-				F9BE52552B6D457900781072 /* SelectNameView.swift in Sources */,
+				F92843382B72324800022088 /* LoginView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
