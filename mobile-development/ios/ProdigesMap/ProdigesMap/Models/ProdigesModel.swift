@@ -38,6 +38,7 @@ class ProdigesModel: NSObject {
             currentListener = prodigesCollection.document(currentId).addSnapshotListener { querySnapshot, error in
                 let prodige = try? querySnapshot?.data(as: Prodige.self)
                 self.currentProdige = prodige
+                UserDefaults.standard.set(currentId, forKey: "currentId")
             }
         }
     }
@@ -48,7 +49,12 @@ class ProdigesModel: NSObject {
         manager.delegate = self
         manager.requestWhenInUseAuthorization()
         
+        setupCurrentProdige()
         trackProdiges()
+    }
+    
+    func setupCurrentProdige() {
+        currentId = UserDefaults.standard.string(forKey: "currentId")
     }
 }
 
@@ -127,20 +133,3 @@ extension ProdigesModel {
         prodigesCollection.document(id).updateData(values)
     }
 }
-
-/*
- extension UserDefaults {
- @objc dynamic var currentProdige: String? { string(forKey: "CurrentProdige" )}
- 
- typealias AsyncValues<T> = AsyncPublisher<AnyPublisher<T, Never>>
- func observeKey<T>(at path: KeyPath<UserDefaults, T>) -> AsyncValues<T> {
- return self.publisher(for: path, options: [.initial, .new])
- .eraseToAnyPublisher()
- .values
- }
- 
- func setId(_ id: String, forKey key: String) {
- set(id, forKey: key)
- }
- }
- */
