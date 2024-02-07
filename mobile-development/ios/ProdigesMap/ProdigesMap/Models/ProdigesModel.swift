@@ -32,12 +32,27 @@ class ProdigesModel: NSObject {
         manager.requestWhenInUseAuthorization()
         
         Task {
+            var currentListener: ListenerRegistration?
             for await currentId in UserDefaults.standard.observeKey(at: \.currentProdige) {
                 switch currentId {
                 case .none: print("No current one!")
                 case .some(let currentID):
-                    let documentRef = prodigesCollection.document(currentID)
-                    currentProdige = try? await documentRef.getDocument(as: Prodige.self)
+                    if let listener = currentListener {
+                        listener.remove()
+                        currentListener = nil
+                    }
+                    currentListener = prodigesCollection.whereField("id", isEqualTo: currentID).addSnapshotListener { querySnapshot, error in
+                        guard let documents = querySnapshot?.documents else {
+                            print("Error fetching documents: \(error!)")
+                            return
+                        }
+                        do {
+                            self.currentProdige = try documents.compactMap { try $0.data(as: Prodige.self) }.first
+                        } catch {
+                            print("Error deserializing documents: \(error)")
+                        }
+                        
+                    }
                 }
             }
         }
