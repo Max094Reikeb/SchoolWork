@@ -62,6 +62,7 @@ extension ProdigesModel: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         print("\(manager.authorizationStatus)")
         if manager.authorizationStatus == .authorizedWhenInUse {
+            locationUpdates()
             Task {
                 let monitor = await CLMonitor("monitorName")
                 let condition = CLMonitor.CircularGeographicCondition(center: center, radius: 2000)
@@ -74,24 +75,19 @@ extension ProdigesModel: CLLocationManagerDelegate {
                     }
                 }
                 
-                let events = await monitor.events
+                let futureEvents = await monitor.events
                 let allEvents = switch initialEvent {
-                case .some(let initialEvent): chain(AsyncJustSequence(initialEvent), events).eraseToAnyAsyncSequence()
-                case .none: events.eraseToAnyAsyncSequence()
+                case .some(let initialEvent): chain(AsyncJustSequence(initialEvent), futureEvents).eraseToAnyAsyncSequence()
+                case .none: futureEvents.eraseToAnyAsyncSequence()
                 }
-                
-                let stateStrings = allEvents
-                    .map { event in
-                        return switch event.state {
-                        case .unknown: "unknown"
-                        case .satisfied: "satisfied"
-                        case .unsatisfied: "unsatisfied"
-                        case .unmonitored: "unmonitored"
-                        @unknown default: "unknown default"
-                        }
+
+                for try await event in allEvents {
+                    guard let currentId else { return }
+                    let tracked = switch event.state {
+                    case .satisfied: true
+                    default: false
                     }
-                for try await stateString in stateStrings {
-                    // name = stateString
+                    updateProdige(id: currentId, values: ["tracked": tracked])
                 }
             }
         }
@@ -118,11 +114,11 @@ extension ProdigesModel {
         Task {
             let updates = CLLocationUpdate.liveUpdates()
             for try await update in updates {
-                if let loggedInProdigeId = currentProdige?.id {
+                if let currentId, let currentProdige, currentProdige.tracked {
                     if let location = update.location {
                         print(location)
                         let position = GeoPoint(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                        updateProdige(id: loggedInProdigeId, values: ["position": position])
+                        updateProdige(id: currentId, values: ["position": position])
                     }
                 }
             }
