@@ -11,14 +11,14 @@ import Foundation
 import SwiftUI
 
 struct LoginView: View {
-
+    
     let model = ProdigesModel.shared
     @Environment(\.dismiss) var dismiss
     @State private var badName = false
     @State private var badPassword = false
     @State private var name = ""
     @State private var password = ""
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -35,7 +35,7 @@ struct LoginView: View {
                         badName.toggle()
                     case .some(let foundProdige):
                         if foundProdige.password == password {
-                            UserDefaults.standard.setId(foundProdige.id!, forKey: "CurrentProdige")
+                            model.currentId = foundProdige.id!
                             dismiss()
                         } else {
                             badPassword.toggle()
@@ -64,6 +64,7 @@ struct LoginView: View {
                         Task {
                             await registerNewProdige()
                         }
+                        dismiss()
                     }
                     Button("Non") {
                         badName.toggle()
@@ -88,7 +89,7 @@ struct LoginView: View {
         }
         .navigationViewStyle(.stack)
     }
-
+    
     func registerNewProdige() async {
         let position = GeoPoint(latitude: 0, longitude: 0)
         do {
@@ -99,7 +100,7 @@ struct LoginView: View {
                 "tracked": false
             ])
             print("Document added with ID: \(ref.documentID)")
-            UserDefaults.standard.setId(ref.documentID, forKey: "CurrentProdige")
+            model.currentId = ref.documentID
         } catch {
             print("Error adding document: \(error.localizedDescription)")
         }

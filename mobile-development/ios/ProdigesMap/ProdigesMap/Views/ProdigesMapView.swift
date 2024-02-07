@@ -10,15 +10,15 @@ import MapKit
 import SwiftUI
 
 struct ProdigesMapView: View {
-
+    
     let model = ProdigesModel.shared
     @State var newUserPresented = false
     @State var position: MKCoordinateRegion
-
+    
     init() {
         position = MKCoordinateRegion(center: model.center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
     }
-
+    
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
