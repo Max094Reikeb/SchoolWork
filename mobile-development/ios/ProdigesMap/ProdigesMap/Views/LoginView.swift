@@ -35,6 +35,7 @@ struct LoginView: View {
                         badName.toggle()
                     case .some(let foundProdige):
                         if foundProdige.password == password {
+                            model.currentId = nil
                             model.currentId = foundProdige.id!
                             dismiss()
                         } else {
@@ -93,6 +94,7 @@ struct LoginView: View {
     func registerNewProdige() async {
         let position = GeoPoint(latitude: 0, longitude: 0)
         do {
+            model.currentId = nil
             let ref = try await ProdigesModel.shared.prodigesCollection.addDocument(data: [
                 "name": name,
                 "password": password,
