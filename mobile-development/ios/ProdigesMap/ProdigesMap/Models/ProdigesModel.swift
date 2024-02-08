@@ -38,7 +38,11 @@ class ProdigesModel: NSObject {
             Task {
                 await updateProdigeTracking()
             }
-            guard let currentId = currentId else { return }
+            guard let currentId = currentId else {
+                currentProdige = nil
+                UserDefaults.standard.removeObject(forKey: "currentId")
+                return
+            }
             
             currentListener = prodigesCollection.document(currentId).addSnapshotListener { querySnapshot, error in
                 let prodige = try? querySnapshot?.data(as: Prodige.self)

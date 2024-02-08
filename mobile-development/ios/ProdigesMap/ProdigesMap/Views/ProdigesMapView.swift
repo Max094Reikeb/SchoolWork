@@ -13,6 +13,7 @@ struct ProdigesMapView: View {
     
     let model = ProdigesModel.shared
     @State var newUserPresented = false
+    @State var deconnectUser = false
     @State var position: MKCoordinateRegion
     
     init() {
@@ -28,31 +29,33 @@ struct ProdigesMapView: View {
                     }
                 }
                 VStack {
-                    HStack {
-                        if let currentProdige = model.currentProdige {
-                            Text(currentProdige.name)
-                                .font(.largeTitle)
-                                .underline()
-                                .bold()
-                                .padding(.leading)
-                            Spacer()
-                        }
-                    }
                     Spacer()
                     HStack {
                         Spacer()
-                        Button(action: {
-                            newUserPresented.toggle()
-                        }) {
-                            Image(systemName: "plus.circle.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 60, height: 60)
-                                .foregroundColor(.blue)
-                                .background(Color.white)
-                                .clipShape(Circle())
-                                .padding(.trailing)
-                                .padding(.top)
+                        if let currentProdige = model.currentProdige {
+                            Button(action: {
+                                deconnectUser.toggle()
+                            }) {
+                                Text(currentProdige.name)
+                                    .font(.largeTitle)
+                                    .underline()
+                                    .bold()
+                                    .padding(.trailing)
+                            }
+                        } else {
+                            Button(action: {
+                                newUserPresented.toggle()
+                            }) {
+                                Image(systemName: "plus.circle.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 60, height: 60)
+                                    .foregroundColor(.blue)
+                                    .background(Color.white)
+                                    .clipShape(Circle())
+                                    .padding(.trailing)
+                                    .padding(.top)
+                            }
                         }
                     }
                 }
@@ -60,6 +63,23 @@ struct ProdigesMapView: View {
         }
         .navigationViewStyle(.stack)
         .sheet(isPresented: $newUserPresented ) { LoginView() }
+        .alert(
+            "Deconnexion !",
+            isPresented: $deconnectUser,
+            actions: {
+                Button("Oui") {
+                    model.updateProdige(id: model.currentId!, values: ["tracked": false])
+                    model.currentId = nil
+                    deconnectUser.toggle()
+                }
+                Button("Non") {
+                    deconnectUser.toggle()
+                }
+            },
+            message: {
+                Text("Voulez-vous vous déconnecter de votre compte ? Si oui, vous devrez vous reconnecter !")
+            }
+        )
     }
 }
 
