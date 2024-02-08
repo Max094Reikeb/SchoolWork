@@ -8,7 +8,7 @@
 import FirebaseFirestore
 import Foundation
 
-struct Prodige: Identifiable, Codable {
+struct Prodige: Identifiable, Codable, Equatable {
     @DocumentID var id: String?
     let name: String
     let password: String

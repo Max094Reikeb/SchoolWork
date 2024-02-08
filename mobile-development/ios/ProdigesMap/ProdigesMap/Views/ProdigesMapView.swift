@@ -24,6 +24,9 @@ struct ProdigesMapView: View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
                 Map(initialPosition: MapCameraPosition.region(position)) {
+                    if model.currentId == nil || !model.trackedProdiges.contains(where: { $0 == model.currentProdige }) {
+                        UserAnnotation()
+                    }
                     ForEach(model.trackedProdiges) { prodige in
                         Marker(prodige.name, systemImage: "person.circle", coordinate: CLLocationCoordinate2D(latitude: prodige.position.latitude, longitude: prodige.position.longitude))
                     }

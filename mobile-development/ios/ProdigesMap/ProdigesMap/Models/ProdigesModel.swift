@@ -12,6 +12,7 @@ import CoreLocation
 import Firebase
 import Foundation
 import SwiftUI
+import UserNotifications
 
 @Observable
 class ProdigesModel: NSObject {
@@ -26,7 +27,8 @@ class ProdigesModel: NSObject {
     static let shared = ProdigesModel()
     let center = CLLocationCoordinate2D(latitude: 48.9355351, longitude: 2.3030026)
     private let manager = CLLocationManager()
-    var updateTask: Task<(), Error>?
+    private var updateTask: Task<(), Error>?
+    private var notificationAuthorized = false
     
     var currentListener: ListenerRegistration?
     @ObservationIgnored var currentId: String? {
@@ -55,6 +57,7 @@ class ProdigesModel: NSObject {
     override init() {
         super.init()
         
+        initNotifications()
         manager.delegate = self
         manager.requestAlwaysAuthorization()
         
@@ -131,6 +134,7 @@ extension ProdigesModel {
     }
     
     func startLocationUpdates() {
+        displayUpdateNotification(.localisationUpdateStarted)
         updateTask = Task {
             let updates = CLLocationUpdate.liveUpdates()
             for try await update in updates {
@@ -147,11 +151,51 @@ extension ProdigesModel {
     }
     
     func stopLocationUpdates() {
+        displayUpdateNotification(.localisationUpdateStopped)
         updateTask?.cancel()
         updateTask = .none
     }
     
     func updateProdige(id: String, values: [AnyHashable: Any]) {
         prodigesCollection.document(id).updateData(values)
+    }
+    
+    func initNotifications() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { result, error in
+            self.notificationAuthorized = result
+        }
+    }
+    
+    func displayUpdateNotification(_ notification: ProdigesModel.Notification) {
+        Task {
+            repeat {} while !notificationAuthorized
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
+            let notificationContent = UNMutableNotificationContent()
+            notificationContent.title = notification.title
+            notificationContent.body = notification.body
+            let request = UNNotificationRequest(identifier: notification.identifier, content: notificationContent, trigger: trigger)
+            let _ = try await UNUserNotificationCenter.current().add(request)
+        }
+    }
+    
+    enum Notification: String, CaseIterable {
+        case localisationUpdateStarted
+        case localisationUpdateStopped
+        
+        var identifier: String {
+            switch self {
+            case .localisationUpdateStarted: "Started"
+            case .localisationUpdateStopped: "Ended"
+            }
+        }
+        var title: String {
+            "Localisation"
+        }
+        var body: String {
+            switch self {
+            case .localisationUpdateStarted: "Votre position est actuellement utilisée parce que vous êtes autour de la Fac."
+            case .localisationUpdateStopped: "Votre position n'est plus utilisé parce que vous vous être éloigné de la Fac."
+            }
+        }
     }
 }
