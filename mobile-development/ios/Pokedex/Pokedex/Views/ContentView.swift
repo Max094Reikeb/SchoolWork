@@ -18,7 +18,7 @@ struct ContentView: View {
                     NavigationLink {
                         PokemonDetails(urlString: pokemonLink.url)
                     } label: {
-                        Text(pokemonLink.name)
+                        Text(pokemonLink.name.capitalized)
                     }
                 }
             }

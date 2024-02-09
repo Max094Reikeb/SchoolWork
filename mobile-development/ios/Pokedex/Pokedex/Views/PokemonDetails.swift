@@ -16,49 +16,66 @@ struct PokemonDetails: View {
         self.urlString = urlString
     }
     
+    init(pokemon: Pokemon) {
+        self.currentPokemon = pokemon
+        self.urlString = "https://pokeapi.co/api/v2/pokemon/\(pokemon.id)/"
+    }
+    
     var body: some View {
-        VStack {
-            if let currentPokemon {
-                AsyncImage(url: URL(string: currentPokemon.sprites.front_default))
-                    .padding(.top)
-                Text(currentPokemon.name)
-                    .font(.largeTitle)
-                    .bold()
-                
-                List {
-                    Section("More details") {
-                        HStack {
-                            Text("Type(s)")
-                            Spacer()
-                            Text(currentPokemon.types.first!.type.name)
-                            if currentPokemon.types.first! != currentPokemon.types.last! {
-                                Text("& \(currentPokemon.types.last!.type.name)")
+        ZStack {
+            // Color(UIColor.systemBackground).ignoresSafeArea()
+            
+            VStack {
+                if let currentPokemon {
+                    ZStack {
+                        AsyncImage(url: URL(string: currentPokemon.sprites.front_default))
+                            .padding(.top)
+                        Circle()
+                            .stroke()
+                            .frame(width: 100, height: 100)
+                    }
+                    Text(currentPokemon.name.capitalized)
+                        .font(.largeTitle)
+                        .bold()
+                    
+                    Form {
+                        Section("More details") {
+                            HStack {
+                                Text(currentPokemon.types.count > 1 ? "Types" : "Type")
+                                Spacer()
+                                Text(currentPokemon.types.first!.type.name.capitalized)
+                                if currentPokemon.types.count > 1 {
+                                    Spacer().frame(width: 3)
+                                    Text("& \(currentPokemon.types.last!.type.name.capitalized)")
+                                }
+                            }
+                            NavigationLink {
+                                GamesDetails(games: .constant(currentPokemon.game_indices))
+                            } label: {
+                                Text("Games")
+                            }
+                            NavigationLink {
+                                MovesDetails(moves: .constant(currentPokemon.moves))
+                            } label: {
+                                Text("Moves")
                             }
                         }
-                        NavigationLink {
-                            GamesDetails(games: .constant(currentPokemon.game_indices))
-                        } label: {
-                            Text("Games")
-                        }
-                        NavigationLink {
-                            MovesDetails(moves: .constant(currentPokemon.moves))
-                        } label: {
-                            Text("Moves")
-                        }
                     }
+                    
+                    Spacer()
+                } else {
+                    ProgressView()
                 }
-                
-                Spacer()
-            } else {
-                ProgressView()
             }
         }
-        .onAppear {
-            Task {
+        .task {
+            do {
                 guard let url = URL(string: self.urlString) else {
                     print("Error with URL")
                     return
                 }
+                
+                if currentPokemon != nil { return }
                 
                 let (data, response) = try await URLSession.shared.data(from: url)
                 
@@ -69,11 +86,13 @@ struct PokemonDetails: View {
                 
                 let pokemon = try JSONDecoder().decode(Pokemon.self, from: data)
                 currentPokemon = pokemon
+            } catch {
+                print(error.localizedDescription)
             }
         }
     }
 }
 
 #Preview {
-    PokemonDetails(urlString: PokemonLink.preview.url)
+    PokemonDetails(pokemon: .preview)
 }

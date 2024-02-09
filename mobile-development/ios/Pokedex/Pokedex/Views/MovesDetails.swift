@@ -14,7 +14,7 @@ struct MovesDetails: View {
     var body: some View {
         List {
             ForEach(moves, id: \.self) { move in
-                MoveView(title: move.move.name, url: move.move.url)
+                MoveView(title: move.move.name.capitalized, url: move.move.url)
             }
         }
         .navigationTitle("Moves")

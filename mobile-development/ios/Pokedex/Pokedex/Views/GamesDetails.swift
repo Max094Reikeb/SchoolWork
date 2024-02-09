@@ -14,7 +14,7 @@ struct GamesDetails: View {
     var body: some View {
         List {
             ForEach(games, id: \.self) { game in
-                Text("\(game.version.name) - #\(game.game_index) in national dex")
+                Text("\(game.version.name.capitalized) - #\(game.game_index) in national dex")
             }
         }
         .navigationTitle("Games")
