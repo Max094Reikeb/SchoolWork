@@ -12,7 +12,7 @@ struct ContentView: View {
     let model = ApiModel.shared
     
     var body: some View {
-        NavigationSplitView {
+        NavigationView {
             List {
                 ForEach(model.pokemonLinks, id: \.self) { pokemonLink in
                     NavigationLink {
@@ -23,8 +23,6 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Pokedex")
-        } detail: {
-            Text("")
         }
     }
 }

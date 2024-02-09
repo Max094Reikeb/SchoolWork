@@ -18,12 +18,40 @@ struct PokemonDetails: View {
     
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: currentPokemon?.sprites.front_default ?? ""))
-                .padding(.top)
-            Text(currentPokemon?.name ?? "")
-                .font(.largeTitle)
-                .bold()
-            Spacer()
+            if let currentPokemon {
+                AsyncImage(url: URL(string: currentPokemon.sprites.front_default))
+                    .padding(.top)
+                Text(currentPokemon.name)
+                    .font(.largeTitle)
+                    .bold()
+                
+                List {
+                    Section("More details") {
+                        HStack {
+                            Text("Type(s)")
+                            Spacer()
+                            Text(currentPokemon.types.first!.type.name)
+                            if currentPokemon.types.first! != currentPokemon.types.last! {
+                                Text("& \(currentPokemon.types.last!.type.name)")
+                            }
+                        }
+                        NavigationLink {
+                            GamesDetails(games: .constant(currentPokemon.game_indices))
+                        } label: {
+                            Text("Games")
+                        }
+                        NavigationLink {
+                            MovesDetails(moves: .constant(currentPokemon.moves))
+                        } label: {
+                            Text("Moves")
+                        }
+                    }
+                }
+                
+                Spacer()
+            } else {
+                ProgressView()
+            }
         }
         .onAppear {
             Task {
