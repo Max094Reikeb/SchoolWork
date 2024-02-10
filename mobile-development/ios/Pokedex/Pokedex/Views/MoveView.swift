@@ -20,6 +20,7 @@ struct MoveView: View {
             Spacer()
             if let currentMove {
                 Text(currentMove.type.name.uppercased())
+                    .foregroundStyle(Types.color(forTypeName: currentMove.type.name))
             } else {
                 ProgressView()
             }

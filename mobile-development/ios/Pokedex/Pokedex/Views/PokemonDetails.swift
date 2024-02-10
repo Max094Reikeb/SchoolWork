@@ -33,6 +33,7 @@ struct PokemonDetails: View {
                         Circle()
                             .stroke()
                             .frame(width: 100, height: 100)
+                            .foregroundStyle(Types.color(forTypeName: currentPokemon.types.first!.type.name))
                     }
                     Text(currentPokemon.name.capitalized)
                         .font(.largeTitle)
@@ -44,9 +45,13 @@ struct PokemonDetails: View {
                                 Text(currentPokemon.types.count > 1 ? "Types" : "Type")
                                 Spacer()
                                 Text(currentPokemon.types.first!.type.name.capitalized)
+                                    .foregroundStyle(Types.color(forTypeName: currentPokemon.types.first!.type.name))
                                 if currentPokemon.types.count > 1 {
                                     Spacer().frame(width: 3)
-                                    Text("& \(currentPokemon.types.last!.type.name.capitalized)")
+                                    Text("&")
+                                    Spacer().frame(width: 3)
+                                    Text(currentPokemon.types.last!.type.name.capitalized)
+                                        .foregroundStyle(Types.color(forTypeName: currentPokemon.types.last!.type.name))
                                 }
                             }
                             NavigationLink {
