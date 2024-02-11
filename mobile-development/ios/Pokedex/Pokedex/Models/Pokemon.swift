@@ -15,6 +15,10 @@ struct PokemonLink: Codable, Hashable {
 struct Pokemon: Codable, Hashable {
     var name: String
     var id: Int
+    var height: Int
+    var weight: Int
+    var base_experience: Int
+    var abilities: [Abilities]
     var sprites: Sprite
     var game_indices: [Games]
     var moves: [Moves]
@@ -22,9 +26,9 @@ struct Pokemon: Codable, Hashable {
 }
 
 extension PokemonLink {
-    static var preview = PokemonLink(name: "pecharunt", url: Sprite.preview.front_default)
+    static var preview = PokemonLink(name: "charizard", url: Sprite.preview.front_default)
 }
 
 extension Pokemon {
-    static var preview = Pokemon(name: "pecharunt", id: 1, sprites: Sprite.preview, game_indices: [.preview], moves: [.preview], types: [.preview])
+    static var preview = Pokemon(name: "charizard", id: 6, height: 45, weight: 895, base_experience: 128, abilities: [.preview], sprites: Sprite.preview, game_indices: [.preview], moves: [.preview], types: [.preview])
 }

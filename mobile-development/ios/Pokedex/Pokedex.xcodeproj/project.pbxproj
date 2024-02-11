@@ -20,6 +20,7 @@
 		F99A5B9C2B7512C400720B92 /* ApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99A5B9B2B7512C400720B92 /* ApiModel.swift */; };
 		F99A5B9E2B75136F00720B92 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99A5B9D2B75136F00720B92 /* Pokemon.swift */; };
 		F99A5BA42B75212000720B92 /* PokemonDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99A5BA32B75212000720B92 /* PokemonDetails.swift */; };
+		F9E01D972B78BE4C0045FF8E /* Abilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E01D962B78BE4C0045FF8E /* Abilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		F99A5B9B2B7512C400720B92 /* ApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiModel.swift; sourceTree = "<group>"; };
 		F99A5B9D2B75136F00720B92 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		F99A5BA32B75212000720B92 /* PokemonDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetails.swift; sourceTree = "<group>"; };
+		F9E01D962B78BE4C0045FF8E /* Abilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Abilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				F92D8A162B7633690080DF1A /* Moves.swift */,
 				F92D8A1A2B7678CE0080DF1A /* Games.swift */,
 				F92D8A1C2B7678DD0080DF1A /* Types.swift */,
+				F9E01D962B78BE4C0045FF8E /* Abilities.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				F99A5B9E2B75136F00720B92 /* Pokemon.swift in Sources */,
 				F92D8A172B7633690080DF1A /* Moves.swift in Sources */,
 				F92D8A152B7632790080DF1A /* MovesDetails.swift in Sources */,
+				F9E01D972B78BE4C0045FF8E /* Abilities.swift in Sources */,
 				F99A5B9C2B7512C400720B92 /* ApiModel.swift in Sources */,
 				F92D8A1D2B7678DD0080DF1A /* Types.swift in Sources */,
 				F99A5B8E2B75126200720B92 /* PokedexApp.swift in Sources */,
@@ -327,11 +331,12 @@
 				DEVELOPMENT_TEAM = 5RN5AFP4W6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.educational-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -356,11 +361,12 @@
 				DEVELOPMENT_TEAM = 5RN5AFP4W6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.educational-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

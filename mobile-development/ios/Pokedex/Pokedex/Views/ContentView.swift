@@ -18,7 +18,12 @@ struct ContentView: View {
                     NavigationLink {
                         PokemonDetails(urlString: pokemonLink.url)
                     } label: {
-                        Text(pokemonLink.name.capitalized)
+                        HStack {
+                            Image("pokeball")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                            Text(pokemonLink.name.capitalized)
+                        }
                     }
                 }
             }

@@ -23,7 +23,7 @@ struct PokemonDetails: View {
     
     var body: some View {
         ZStack {
-            // Color(UIColor.systemBackground).ignoresSafeArea()
+            Color(uiColor: UIColor.quaternarySystemFill).ignoresSafeArea()
             
             VStack {
                 if let currentPokemon {
@@ -32,7 +32,7 @@ struct PokemonDetails: View {
                             .padding(.top)
                         Circle()
                             .stroke()
-                            .frame(width: 100, height: 100)
+                            .frame(width: 125, height: 125)
                             .foregroundStyle(Types.color(forTypeName: currentPokemon.types.first!.type.name))
                     }
                     Text(currentPokemon.name.capitalized)
@@ -41,6 +41,11 @@ struct PokemonDetails: View {
                     
                     Form {
                         Section("More details") {
+                            HStack {
+                                Text("National dex #")
+                                Spacer()
+                                Text("\(currentPokemon.id)")
+                            }
                             HStack {
                                 Text(currentPokemon.types.count > 1 ? "Types" : "Type")
                                 Spacer()
@@ -54,6 +59,21 @@ struct PokemonDetails: View {
                                         .foregroundStyle(Types.color(forTypeName: currentPokemon.types.last!.type.name))
                                 }
                             }
+                            HStack {
+                                Text("Height")
+                                Spacer()
+                                Text("\(Double(currentPokemon.height) / 10.0, specifier: "%.1f") m")
+                            }
+                            HStack {
+                                Text("Weight")
+                                Spacer()
+                                Text("\(Double(currentPokemon.weight) / 10, specifier: "%.1f") kg")
+                            }
+                            HStack {
+                                Text("Base experience")
+                                Spacer()
+                                Text("\(currentPokemon.base_experience)")
+                            }
                             NavigationLink {
                                 GamesDetails(games: .constant(currentPokemon.game_indices))
                             } label: {
@@ -63,6 +83,11 @@ struct PokemonDetails: View {
                                 MovesDetails(moves: .constant(currentPokemon.moves))
                             } label: {
                                 Text("Moves")
+                            }
+                            HStack {
+                                Text(currentPokemon.abilities.count > 1 ? "Abilities" : "Ability")
+                                Spacer()
+                                Text(currentPokemon.abilities.map { $0.ability.name.capitalized }.joined(separator: ", "))
                             }
                         }
                     }

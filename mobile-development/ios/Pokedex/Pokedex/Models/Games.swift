@@ -29,5 +29,5 @@ extension Version {
 }
 
 extension Sprite {
-    static let preview = Sprite(front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1025.png")
+    static let preview = Sprite(front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png")
 }
