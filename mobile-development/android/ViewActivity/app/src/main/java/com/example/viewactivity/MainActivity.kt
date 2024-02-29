@@ -8,12 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.details)
+        setContentView(R.layout.list)
         supportActionBar?.setBackgroundDrawable(
             ContextCompat.getDrawable(
                 this,
@@ -21,26 +23,12 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        val product = Product(
-            name = "Petits pois et carottes",
-            brand = "Cassegrain",
-            barcode = "394736288273648",
-            nutriscore = Nutriscore.B,
-            image = "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=joseph-gonzalez-fdlZBWIP0aM-unsplash.jpg",
-            quantity = "400g (280g net égoutté)",
-            countries = listOf("France", "Japon", "Suisse"),
-            ingredients = listOf(
-                "Petits pois 66%",
-                "eau",
-                "garniture 2,8% (salade oignon, grelot)",
-                "sucre",
-                "sel",
-                "arôme naturel"
-            ),
-            allergenes = listOf("Aucune"),
-            additifs = listOf("Aucun")
-        )
-        fillDetails(product)
+        findViewById<RecyclerView>(R.id.list).apply {
+            val content = List(1000) { generateFakeProduct() }
+
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = ListAdapter(content)
+        }
     }
 
     private fun fillDetails(product: Product) {
