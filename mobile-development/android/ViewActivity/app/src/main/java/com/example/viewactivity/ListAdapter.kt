@@ -8,7 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class ListAdapter(private val products: List<Product>) : RecyclerView.Adapter<ItemCell>() {
+class ListAdapter(private val products: List<Product>, private val listener: OnClickListener) :
+    RecyclerView.Adapter<ItemCell>() {
     override fun getItemCount(): Int {
         return products.size
     }
@@ -20,8 +21,16 @@ class ListAdapter(private val products: List<Product>) : RecyclerView.Adapter<It
     }
 
     override fun onBindViewHolder(holder: ItemCell, position: Int) {
-        holder.updateCellWith(products[position])
+        val product = products[position]
+        holder.updateCellWith(product)
+        holder.itemView.setOnClickListener {
+            listener.onProductClicked(product, holder.itemView)
+        }
     }
+}
+
+interface OnClickListener {
+    fun onProductClicked(product: Product, itemView: View)
 }
 
 class ItemCell(v: View) : RecyclerView.ViewHolder(v) {
