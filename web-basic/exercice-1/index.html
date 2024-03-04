@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Exercice n°1</title>
+        <style>
+            .sauBt {
+                background-color: blue;
+                color: white;
+            }
+            #fieldset1 {
+                margin-left: 5%;
+                height: 30%;
+                width: 40%;
+                display: inline-block;
+                float: left;
+            }
+            #fieldset2 {
+                margin-right: 5%;
+                height: 30%;
+                width: 40%;
+                display: inline-block;
+                float: right;
+            }
+        </style>
+    </head>
+
+    <body>
+        <center><h1>Ajout d'un enseignant</h1></center>
+        <form method="POST" action=#>
+            <div id="firstDiv">
+                <fieldset id= "fieldset1">
+                    <legend>
+                        <h4>Informations personnelles</h4>
+                    </legend>
+                    <label for="nom">Nom</label><br>
+                    <input type="text" name="nom" class="in" placeholder="Nom" required autofocus><br>
+                    <br>
+                    <label for="nom">Prénom</label><br>
+                    <input type="text" name="prenom" class="in" placeholder="Prénom" required autofocus><br>
+                    <br>
+                    <label for="dateNais">Date de naissance</label><br>
+                    <input type="date" name="dateNais" class="in" placeholder="Date de naissance"><br>
+                    <br>
+                    <label for="email">Email</label><br>
+                    <input type="email" name="email" class="in" placeholder="Adresse électronique" required>
+                    <span>
+                        <acronym title="Email est unique dans la base">?
+                        </acronym>
+                    </span>
+                    <br><br>
+                    <label for="email">Confirmation email</label><br>
+                    <input type="email" name="email" class="in" placeholder="Adresse électronique" required><br>
+                    <br>
+                    <label for="adress">Adresse</label><br>
+                    <textarea rows="5" cols="26">
+                    </textarea>
+                    <br><br>
+                    <label for="gender">Sexe</label><br>
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Homme</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Femme</label><br>
+                    <br>
+                    <label>Grade</label><br>
+                    <select multiple size="5">
+                        <option value="">-------</option>
+                        <option value="assistant">Assistant</option>
+                        <option value="chc">Chargé(e) de cours</option>
+                        <option value="MCA">MCA</option>
+                        <option value="MCB">MCB</option>
+                        <option value="prof">Professeur</option>
+                        <option value="autres">Autre</option>
+                    </select><br>
+                    <br>
+                    <label>Dernier diplôme</label><br>
+                    <input list="diplomes" name="diplome" placeholder="Dernier diplôme">
+                    <datalist id="diplomes">
+                        <option value="Doctorat">
+                        <option value="Thèse d'état">
+                        <option value="Nouvelle thèse">
+                        <option value="Master">
+                        <option value="Ingéniorat">
+                    </datalist>
+                    <br><br>
+                </fieldset>
+            </div>
+
+            <div id="enseignement">
+                <fieldset id="fieldset2">
+                    <legend><h4>Enseignements et recherche</h4></legend>
+                    <br>
+                    <button><strong>+</strong></button> Modules théoriques
+                    <br>
+                    <div class="divMod">
+                        <br>
+                        <input type="checkbox" name="modules" value="tg">Théorie des graphes<br>
+                        <input type="checkbox" name="plateforme" value="tl">Théorie des langages<br>
+                        <input type="checkbox" name="plateforme" value="lm">Logique mathématiques<br>
+                        <input type="checkbox" name="plateforme" value="cd">Complexité et décidabilité<br>
+                    </div>
+                    <br><br>
+                    <button><strong>+</strong></button> Modules de programmation
+                    <br>
+                    <div class="divMod">
+                        <input type="checkbox" name="modules" value="alg">Algorithmique<br>
+                        <input type="checkbox" name="modules" value="obj">Programmation objects<br>
+                        <input type="checkbox" name="modules" value="web">Programmation web<br>
+                        <input type="checkbox" name="modules" value="fonc">Programmation fonctionnelle<br>
+                        <input type="checkbox" name="modules" value="ass">Assembleur<br>
+                        <input type="checkbox" name="modules" value="prog">Prolog<br>
+                        <input type="checkbox" name="modules" value="pds">Python et data science<br>
+                    </div>
+                    <br><br>
+                    <button><strong>+</strong></button> Modules de conception et analyse
+                    <br>
+                    <div class="divMod">
+                        <input type="checkbox" name="modules" value="gl">Génie logiciel<br>
+                        <input type="checkbox" name="modules" value="bd">Base de données<br>
+                        <input type="checkbox" name="modules" value="bda">Base de données avancée<br>
+                        <input type="checkbox" name="modules" value="uml">UML<br>
+                        <input type="checkbox" name="modules" value="umla">UML avancé<br>
+                        <input type="checkbox" name="modules" value="ia">Intelligence artificielle<br>
+                        <input type="checkbox" name="modules" value="bdt">Big Data<br>
+                        <input type="checkbox" name="modules" value="cc">Cloud Computing<br>
+                    </div>
+                    <br><br><br><br>
+                    <button class="sauBt">Sauvegarder</button>
+                    <button class="sauBt">Annuler</button>
+                </fieldset>
+            </div>
+        </form>
+    </body>
+</html>

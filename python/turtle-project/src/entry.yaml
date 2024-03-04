@@ -1,0 +1,7 @@
+axiome: 'a-ca-ca-ca'
+regles:
+  a: 'a+a*a+a+aa*aa+a+a*a+a'
+  b: 'bb+b-a+b-a-bb'
+angle: 90
+taille: 5
+niveau: 3

@@ -4,7 +4,7 @@ My school projects over the years.
 
 ## About
 
-There are python and JavaScript apps/projects.
+In this repository are my development project for my school.
 
 ## License
 All Rights Reserved.

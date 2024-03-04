@@ -1,0 +1,45 @@
+body {
+    background-color: #666699;
+}
+
+#titre {
+    text-align: center;
+    border: 3px solid black;
+    margin-left: 35%;
+    margin-right: 35%;
+    background-color: #969696;
+}
+
+#source {
+    text-align: center;
+    border: 3px solid red;
+    width: 30%;
+    padding: 5px;
+    background-color: #003300;
+    float: left;
+}
+
+#destination {
+    text-align: center;
+    border: 3px solid #003300;
+    width: 30%;
+    margin-left: 67%;
+    padding: 5px;
+    background-color: red;
+}
+
+#panier {
+    text-align: center;
+    font-weight: bold;
+    font-size: 14pt;
+    color: yellow;
+}
+
+img {
+    width:100px;
+    margin: 5px;
+}
+
+.bouton {
+    margin-right: 20px;
+}

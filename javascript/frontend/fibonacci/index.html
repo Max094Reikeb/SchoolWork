@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Exercice Fibonacci</title>
+        <link rel="stylesheet" href="main.css" />
+        <script type="text/javascript" src="main.js"></script>
+    </head>
+
+    <body>
+        <script type="text/javascript">
+        var res;
+        var eme = "e";
+        var n = prompt("Choisissez un rang");
+        var d = new Date();
+        res = fibo (n);
+        document.write("<div id=\"center\">");
+        document.write("À " + d.getHours() + "h" + d.getMinutes() + ",<br>");
+        document.write("Le " + n.italics() + eme.sup() + " terme de la suite de Fibonacci est " + res);
+        document.write("</div>");
+    </script>
+    </body>
+</html>

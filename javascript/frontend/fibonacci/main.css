@@ -1,0 +1,9 @@
+#center {
+    background-color: #FF00FF;
+    text-align: center;
+    color: #000080;
+    border: dashed red 4px;
+    padding: 20px;
+    margin-left: 35%;
+    margin-right: 35%;
+}
