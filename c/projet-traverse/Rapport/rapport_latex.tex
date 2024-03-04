@@ -1,0 +1,211 @@
+\documentclass[20pt]{report}
+
+%liste des packages nécessaire à mon rapport
+\usepackage{amsmath}
+
+\usepackage{hyperref} 
+
+\usepackage{hhline}
+
+\usepackage{multirow}  
+
+\usepackage{listings}
+
+\usepackage{fancyhdr}
+
+\usepackage{lastpage}
+
+\usepackage{luatextra}
+
+\usepackage{graphicx}
+
+\usepackage{color}
+
+\usepackage[french]{babel}
+
+%info page de garde de mon doc
+
+\title{Projet informatique: jeu de traverse} 
+\author{Sébastien HAAG, Fatima ZAHRA GLIZI, Maxence BEKIER}
+
+
+%personnalisation de la page de tite dans le préambule
+
+\makeatletter
+\let\mytitle\@title
+\let\myauthor\@author
+\let\mydate\@date
+\makeatother
+
+     \begin{document}
+     
+        \pagestyle{plain}
+        %personnalisation de la page de titre 
+			\begin{titlepage}
+			
+      			\fontsize{21}{21}
+      			
+		  		\centering\Huge\mytitle \vspace{2\baselineskip}
+		  	
+		 		\centering \Large\myauthor \vspace{3\baselineskip}
+		 		
+		 		\centering\Large\mydate \vspace{3\baselineskip} 
+					
+					\begin{figure}[!b]
+						 \includegraphics[scale=1.40]{logo_eisti.png}
+					\end{figure}
+					
+			\end{titlepage}
+
+
+		
+      
+%en tête et pied de page      
+  \lhead{Sébastien, Maxence, Fatima}
+  \rhead{03 mai 2020}
+  \rfoot{Projet informatique: Jeu de traverse}
+ 
+     
+%petite intro     
+      \Huge
+      \fbox{Introduction}
+      \vspace{0.5cm}
+      \LARGE 
+     
+      \begin{flushleft}
+      Dans ce rapport sera expliqué l'intégralité des étapes par lequel nous sommes passés afin de réaliser le jeu "Traverse" en langage C.Ce projet a été réalisé sur le logiciel Visual Code Studio. Traverse est un jeu de stratégie abstrait à deux joueurs qui ressemble au croisement entre les dames chinoises et les échecs. \newline
+       En \textcolor{blue}{1992}, il a gagné le prix \textcolor{magenta}{«MensaSelect»} qui récompense les cinq meilleurs jeux de l'année.\newline
+       Le but étant que deux joueurs sont sur un plateau de \textcolor{blue}{10x10} cases. On distingue les case en bordure et les cases intérieures. Le vainqueur de Traverse est celui qui aura déplacé en premier tous ses pions de  sa zone de départ jusqu'à la zone d'arrivée se trouvant du côté opposé du plateau.
+       \vspace{0.5cm}
+      
+       Nous commencerons par s'intéresser à la version humain contre humain puis nous nous attarderons sur la partie humain contre ordinateur.
+
+      
+     \end{flushleft}
+         
+   \clearpage
+   
+%Sommaire
+
+     \begin{center}
+    \Huge 
+    \fbox{\textbf{SOMMAIRE}} 
+     \end{center}      
+    
+     \begin{flushleft}
+     \renewcommand{\thesection}{\arabic{section}}
+          \section{Version Humain vs Humain}
+          \parindent=2cm \subsection{Stratégie et étapes}
+      \vspace{0.3cm}
+      \parindent=2cm
+     \section{Version Humain vs Ordinateur}
+      \subsection{Stratégie et étapes}
+
+      \vspace{0.3cm}
+    
+     
+    \section{Conclusions et Avis}
+     
+   \end{flushleft}
+       
+       
+   
+   
+   \clearpage
+  
+%Mon avis sur les bases Latex
+   \pagestyle{fancy}
+   
+   \begin{flushleft}
+   \begin{enumerate}
+    \Huge 
+  \fbox{\textbf{Humain vs Humain}}
+   \end{enumerate}
+   
+   
+   \large
+   \parskip=25pt
+   \section*{Stratégie et étapes}
+   \begin{enumerate} %liste des étapes suivies pour programmer la partie Humain vs Humain du jeu
+   
+	\item La première étape consiste à créer un tableau de taille 10 par 10 pour fabriquer un plateau de jeu. Chaque case va être modélisée et prendra la valeur 0 par défaut (case vide) et lorsqu'un pion sera sur une case, cette dernière renverra la valeur spécifique du pion. \newline
+	
+	  \begin{itemize}
+	  
+		\item Dans le jeu, les carrées seront représentés par des "c" et des "C" selon le joueur. De même pour les losanges "l" et "L", les ronds :"r" et "R", enfin les triangle : "t" et "T".\newline 
+	  
+		\item  Au début du jeu, les pions sont placés dans une position spécifique : d'abord les carrés aux extrémités puis les triangles, les losanges et au centre les ronds. 
+	
+	  \end{itemize}
+	  %description de la fonction showTable
+	 \vspace{3\baselineskip}
+	 \item Nous avons créé une fonction nommée \textcolor{blue}{showTable} qui va s'étendre sur plusieurs lignes et qui a pour utilité d'afficher le tableau aux joueurs à n'importe quel moment de la partie. \newline
+	 En  cas d'erreur, cette fonction  renvoie un message d'erreur à la machine et au joueur.
+	\vspace{3\baselineskip}
+	\item Du coup, on a utilisé dans la création de cette fonction \textbf{10} variables allant de \textbf{i} à \textbf{r} afin de créer perpétuellement des boucles \textcolor{magenta}{"pour"} qui permettront durant la partie, de remplir les lignes du tableau dix par dix.
+	\vspace{3\baselineskip}
+	\item Puis, on a réalisé un menu qui se présente au joueur afin qu'il choisisse parmi deux options:
+	  \begin{itemize}%liste des options du menu
+	    \item \textcolor{blue}{\textbf{Consulter les règles du jeu}}. Dans ce cas, les consignes résumées s'affichent à l'écran.
+	    \item \textcolor{blue}{\textbf{Jouer}}. Dans ce cas, on efface l'écran, on affiche le tableau de jeu tel qu'il est au début de la partie avec la fonction \textcolor{blue}{showTable}, et on commence la partie.
+	  \end{itemize}
+	  \end{enumerate}
+	 \vspace{3\baselineskip}
+	 \section*{Fonctionnement du début de la partie}
+	  \begin{enumerate}
+	 		\item Tout d'abord, on \textbf{initialise le tableau (dynamique)} puis on le remplit avec des valeurs \textbf{par défaut} en commençant par les valeurs du joueur 2 puis celles du joueur 1.
+			\item On appelle la fonction \textcolor{blue}{showTable} pour afficher le tableau tel qu'il est au début.
+			\item La partie peut commencer avec la régulation du déplacement des pions.
+	  \end{enumerate}
+   
+ 
+ 
+   
+   \end{flushleft}
+    
+   
+   \clearpage
+   
+
+
+   \begin{flushleft}
+   \begin{enumerate}
+   \Huge 
+   \fbox{\textbf{Humain vs Ordinateur}}
+   \end{enumerate}
+   \end{flushleft}
+   
+   \large
+   \parskip=20pt
+   		N'ayant pas encore étudié l'algorithme MinMax requis, nous n'avons pas pu faire grand-chose dans section.
+    
+    \clearpage
+  
+   \begin{flushleft}
+   \begin{enumerate}
+   \Huge 
+   \fbox{ \textbf{Avis et conclusion}}
+   \end{enumerate}
+   \end{flushleft}
+     
+   \large
+   Concernant notre avis sur ce jeu, nous l'avons trouvé intéressant. Le principe du jeu est très similaire aux dames, le rendant très stratégique et captivant.
+    \vspace{0.3cm}
+     
+   Tout de même cela reste un jeu relativement complexe à coder car nous avons dû élaborer une stratégie de code qui nous a pris plusieurs jours afin de se mettre d'accord sur la part que chacun devait faire. 
+    \vspace{0.3cm}
+    
+    De plus les étapes sont nombreuses pour arriver au résultat final attendu: il nous faut tout d'abord créer un plateau de jeu avec des dimensions spécifiques, puis créer diverses structures pour représenter les pions de chaque joueur avec leur direction bien appropriée. Puis, il reste à coder le déplacement de chaque pion en fonction des choix du joueur.
+     \vspace{0.3cm}
+      
+   Un tel projet nous a permis de bien progresser et de bien assimiler le langage C afin de nous en servir ultérieurement pour réaliser toujours plus de projets informatiques de plus en plus difficiles.
+    \vspace{0.3cm}
+    
+   Le travail en équipe reste l'une des valeurs la plus importante concernant l'informatique et nous avons apprécié le fait de collaborer et de monter ce projet ensemble dans la bonne humeur et le travail d'équipe. 
+   \vspace{0.3cm}
+   
+   On vous remercie pour l'attention que vous avez portée à notre projet. 
+   
+     \clearpage
+  
+     \end{document}

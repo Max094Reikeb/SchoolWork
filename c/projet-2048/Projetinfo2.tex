@@ -1,0 +1,79 @@
+\documentclass[13pt]{report}
+
+\usepackage[a4paper,left=3cm,right=3cm, top=3cm ,bottom=3cm]{geometry}
+
+\usepackage[skip=2.5cm]{parskip}
+\usepackage{fancyhdr}
+
+\pagestyle {fancy}
+
+\usepackage{listings}
+
+\usepackage{titlesec}
+
+\usepackage{amsmath, amsfonts} \usepackage{dsfont}
+
+\usepackage{luatextra}
+
+\usepackage[french]{babel}
+
+\title{Rapport Projet Algorithmique  \\ \textit{Conception du jeu 2048}  }
+
+\author{Loann \textsc{Pottier}, Sébastien \textsc{Haag}, \textsc{Maxence}  \textsc{Bekier}, Alexandre \textsc{Manceau} }
+
+\makeatletter
+
+\let\thetitle\@title
+
+\let\theauthor\@author
+
+\let\thedate\@date
+
+\makeatother
+
+
+\begin{document}
+
+\maketitle
+
+\renewcommand{\thesection}{\textbf{\arabic{section}}}
+\tableofcontents
+\clearpage
+
+\section{Introduction}
+
+\subsection{Règle du jeu}
+\large
+\vspace{0.3cm}
+2048 est un jeu prenant la forme d'un puzzle, élaboré en mars 2014 par le développeur informatique italien Gabriele Cirulli. Par suite, il a été publié en ligne le 9 mars 2014.
+L'objectif principal du jeu est de faire glisser des cases sur une grille, pour fusionner les cases de même valeurs et créer ainsi une case portant le nombre 2048. Après ce score effectué, le joueur pourra continuer sa partie jusqu'à l'infini dans le but de réaliser le meilleur score possible.\\ 
+Lors d'une partie, l'utilisateur sera invité à déplacer son doigt sur l'écran de son smartphone pour déplacer les cases vers la gauche, la droite, le haut ou le bas. Lors d'un mouvement, l'ensemble des cases du plateau sont déplacées dans la même direction jusqu'à rencontrer les bords du plateau ou une autre case sur leur chemin. Il arrivera que deux cases de même valeur rentrent en collision. Elles fusionneront pour donner une case de valeur double (par ex. : deux cases de valeur « 8 » donnent une case de valeur « 16 »). À chaque mouvement, une case portant un 2 ou un 4 apparaît dans le plateau de jeu.\\
+Au début le jeu paraît relativement simple car le nombre de cases dans le plateau est minime mais il se complexifie rapidement du fait du manque de place pour faire bouger les cases, et des erreurs de manipulation possibles, pouvant entraîner un blocage des cases et donc la fin du jeu à plus ou moins long terme, selon l'habileté du joueur. \\
+La partie est gagnée lorsqu'une case portant la valeur « 2048 » apparaît sur la grille. On peut néanmoins continuer à jouer avec des cases de valeurs plus élevées (4 096, 8 192, etc.). Quand le joueur n'a plus la place pour qu'une case de valeur 2 ou 4 apparaisse, à la suite d'un mouvement, le jeu se termine.
+
+
+\clearpage
+
+\section{Problèmes rencontrés}
+\large
+Au cours de notre période de programmation, nous avons rencontré plusieurs problèmes. Il a fallu que l'on se mette d'accord sur nos tâches à accomplir respectivement.
+
+\subsection{Programmation générale}
+Il a fallut réfléchir à la manière de programmer 2048 n'est pas une tâche aisée car il faut réfléchir à l'ensemble des étapes à accomplir comme la création du plateau, les mouvements du joueur (déplacements à gauche, à droite, en haut et en bas). Ce jeu contient aussi une partie extrêmement importante de mathématiques car il faut effectuer de nombreuses opérations pour parvenir à faire fusionner l'ensemble des cases de même valeur si jamais elles venaient à se percuter.
+
+\subsection{Interface Utilisateur}
+L'interface graphique nous a posé certains problèmes. Nous avons pris longtemps avant de décider sous quelle forme afficher le tableau et les cases. Au début, nous avions décidé d'afficher des images mais nous avons finalement opté pour un format classique à base de tirets ("-") et de barres verticales ("|").
+
+\subsection{La fusion}
+Chacun de nous s'est concentré sur une partie de programmation précise. Dans l'ensemble il n'y a eu aucun problème pour chaque personne du groupe. Nous n'avons rencontré qu'un seul problème, c'était si l'on faisait le jeu avec des flèches pour faciliter la tâche à l'utilisateur. Au final nous avons pensé que ce n'était pas la peine car cela pouvait embrouiller l'utilisateur.
+
+\clearpage
+
+
+\section{Conclusion}
+En conclusion, ce projet était agréable à réaliser, et très intéressant car il portait sur un jeu contemporain qui a beaucoup fait parler de lui. Il était cependant difficile de s'organiser compte tenu de la situation sanitaire en France. 
+Il a fallu organiser, répartir les tâches et se parler uniquement par message entre nous.
+ 
+
+
+\end{document}

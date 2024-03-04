@@ -1,0 +1,44 @@
+pour la librairy statique :
+
+- créer pour chaque fichier (sauf le main) .c un fichier .o avec gcc -c f.c -o f.o
+
+
+- pour les fichiers contenant des variables externes rajouter l'option -fpic (donc gcc -fPIC -c f.c -o f.o)
+
+
+- créer la bibilio : ar -rv libmalibstat.a *.o 
+
+
+- construire le pgm executable : gcc main.c -o pgstat libmalibstat.a
+
+
+pour la library dynamique :
+
+- créer pour chaque fichier (sauf le main) .c un fichier .o avec gcc -fPIC -c f.c -o f.o
+
+
+- créer la bibilio : gcc -o libmalibdyn.so -shared *.o
+
+
+- si gcc, faire dans le shell : export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.
+- construire le pgm executable : gcc main.c -o pgdyn -lmalibdyn
+
+
+
+pour voir le contenu d'une biblio, on fait : 
+nm -DC libmalibdyn.so | less
+
+
+
+
+D'une manière générale, sous Linux, on a 3 répertoires:
+
+/*
+- /lib: contient les 'lib' nécessaires au système (pas touche!),
+
+- /usr: contient '/usr/lib' et '/usr/include' pour les fichiers standards (c'est là qu'on trouve 'stdio.h'),
+
+- /usr/local: contient '/usr/local/lib' et '/usr/local/include' pour les fichiers non standards (c'est là qu'on trouve les fichiers spécifiques à un logiciel et là aussi où qu'on doit placer les notre). 
+*/
+
+- sinon les mettre ici : /usr/lib/x86_64-linux-gnu
