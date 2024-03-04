@@ -1,5 +1,0 @@
-Il faut générer les .o avec la commande :
-gcc -c a.c -o a.o (et pareil avec "b" en remplaçant "a" par "b")
-
-et après on génère l'exécutable du programme final avec :
-gcc pgm.c a/a.o b/b.o -o pgm

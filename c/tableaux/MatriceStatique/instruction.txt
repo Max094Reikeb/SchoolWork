@@ -1,1 +1,0 @@
-Execution : cat jeu.txt l ./pgm 6

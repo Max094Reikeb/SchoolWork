@@ -1,8 +1,0 @@
-Exercice 1 :
-On trouve :
-- 40% de nombres premiers entre 2 et 10
-- 40% de nombres premiers entre 2 et 50
-- 40% de nombres premiers entre 2 et 100
-- 15% de nombres premiers entre 2 et 1500
-
-Exercice 2 :
