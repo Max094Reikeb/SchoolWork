@@ -1,0 +1,62 @@
+%! Package = algo
+%! Author = Maxence BEKIER
+%! Date = 29/10/2022
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{algo}[2022/10/29 Maxence BEKIER's Package]
+
+\RequirePackage{times}
+\RequirePackage{indentfirst}
+\RequirePackage{hyperref}
+\RequirePackage{color}
+\RequirePackage{graphicx}
+\RequirePackage[ruled,vlined]{algorithm2e}
+\RequirePackage{float}
+\RequirePackage{amsfonts, amsthm, amssymb, amsmath}
+\RequirePackage{cancel}
+\RequirePackage{verbatim}
+\RequirePackage{multirow, array}
+\RequirePackage{indentfirst}
+\RequirePackage{subcaption}
+\RequirePackage{xcolor, colortbl}
+\RequirePackage{pdflscape}
+\RequirePackage{lipsum}
+\RequirePackage{enumitem}
+\RequirePackage{multicol}
+\RequirePackage{enumerate}
+\PassOptionsToPackage{shortlabels}{enumitem}
+
+\newcommand{\logoDepartment}[1] {
+    \newcommand{\logo}{#1}
+}
+
+\newcommand{\mainTitle}[1] {
+    \newcommand{\inst}{#1}
+}
+
+\newcommand{\secondTitle}[1] {
+    \newcommand{\curso}{#1}
+}
+
+\renewcommand{\maketitle} {
+    \thispagestyle{plain}
+    \hspace{-2.0cm}
+    \begin{minipage}{.2\textwidth}
+        \logo
+    \end{minipage}\quad
+    \begin{minipage}{.9\textwidth}
+        \begin{flushright}
+            \begin{huge}
+                \inst
+            \end{huge}
+
+            \begin{Large}
+                \emph{\curso}
+            \end{Large}
+
+            \begin{footnotesize}
+                Maxence BEKIER
+            \end{footnotesize}
+        \end{flushright}
+    \end{minipage}
+}

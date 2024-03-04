@@ -1,0 +1,19 @@
+fonction affiche_grille(tableau)
+variables
+    entrée
+        tableau tableau # le tableau à afficher
+    interne
+        entier rowIndex # index de déplacement sur les lignes
+        entier colIndex # index de déplacement sur les colonnes
+        chaine ligne
+début
+    afficher("\n| 1 | 2 | 3 | 4 | 5 | 6 | 7 |")
+    afficher("-----------------------------")
+    pour rowIndex allant de 5 a -1 avec un pas de -1: # on se déplace sur toutes les lignes
+        ligne <- "| "
+        pour colIndex allant de 0 a 7: # on se déplace sur toutes les colonnes
+            ligne <- ligne + chaine(tableau[colIndex][rowIndex]) + " | "
+        fin_pour
+        afficher("{tableau[rowIndex][colIndex]}") # on affiche donc chaque valeur
+    fin_pour
+fin

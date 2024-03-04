@@ -1,0 +1,37 @@
+fonction horizontale(tableau, joueur) -> Booléen
+variables
+    entrée
+        tableau tableau # le tableau à vérifier
+        entier joueur # le joueur dont on vérifie la victoire
+    interne
+        tableau lignes # tableau représentant la ligne actuelle
+        tableau colonnes # tableau représentant la colonne actuelle
+        entier colIndex # index de déplacement sur les colonnes
+        entier element # index de déplacement sur la colonne
+        entier elementIndex # index de déplacement sur element
+        entier rowIndex # index de déplacement sur les lignes
+début
+    # on fait 2 tableau pour prendre les lignes et colonnes
+    lignes <- tableau à 1 dimension, de taille 6
+    colonnes <- tableau à 1 dimension, de taille 7
+    pour colIndex allant de 0 à 7: # on se déplace sur la colonne
+        # on ajoute dans le même tableau d'une dimension toutes les colonnes
+        colonnes[colIndex] <- colonnes[colIndex] + string(tableau[colIndex])
+    fin_pour
+    pour chaque element dans colonnes:
+        pour elementIndex allant de 0 à 6:
+            # on ajoute dans le même tableau d'une dimension toutes les lignes
+            lignes[elementIndex] <- lignes[elementIndex] + element[elementIndex]
+        fin_pour
+    fin_pour
+    # on cherche si les tableaux contiennent les patternes "1111" ou "2222" pour indiquer la victoire des joueurs
+    pour chaque rowIndex dans lignes:
+        si rowIndex contient "1111" et le joueur == 1:
+            return True
+        fin_si
+        si rowIndex contient "2222" et le joueur == 2:
+            return True
+        fin_si
+    fin_pour
+    return False
+fin

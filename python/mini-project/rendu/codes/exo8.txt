@@ -1,0 +1,9 @@
+fonction gagne(tableau, joueur) -> Booléen
+variables
+    entrée
+        tableau tableau # le tableau à vérifier
+        entier joueur # le joueur dont on vérifie la victoire
+début
+    # on vérifie si le joueur a 4 pions alignés verticalement, horizontalement ou diagonalement
+    return horizontale(tableau, joueur) ou verticale(tableau, joueur) ou diagonale(tableau, joueur)
+fin

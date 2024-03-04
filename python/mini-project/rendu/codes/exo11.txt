@@ -1,0 +1,36 @@
+fonction jouer(tableau)
+variables
+    entrée
+        tableau tableau # le tableau de jeu
+début
+    # boucle infinie qui ne sera cassée que quand on le voudra
+    tant que 1:
+        affiche_grille(tableau)
+        # c'est le tour du joueur 1
+        tableau <- tour_joueur(tableau, 1)
+        affiche_grille(tableau)
+        # on check pour l'égalité
+        si egalite(tableau):
+            afficher("Il y a égalité !")
+            sortir tant_que # égalité, on casse la boucle
+        fin_si
+        # on check pour la victoire du joueur 1
+        si gagne(tableau, 1):
+            afficher("Bravo joueur 1, tu as gagné !")
+            sortir tant_que # victoire du j1, on casse la boucle
+        fin_si
+        # c'est le tour du joueur 2
+        tableau <- tour_joueur(tableau, 2)
+        affiche_grille(tableau)
+        # on check pour l'égalité
+        si egalite(tableau):
+            afficher("Il y a égalité !")
+            sortir tant_que # égalité, on casse la boucle
+        fin_si
+        # on check pour la victoire du joueur 2
+        si gagne(tableau, 2):
+            afficher("Bravo joueur 2, tu as gagné !")
+            sortir tant_que # victoire du j2, on casse la boucle
+        fin_si
+    fin_tan_que
+fin

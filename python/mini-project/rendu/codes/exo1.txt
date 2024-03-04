@@ -1,0 +1,17 @@
+fonction grille_init() -> Tableau
+variables
+    interne
+        entier rowIndex # index de déplacement sur les lignes
+        entier colIndex # index de déplacement sur les colonnes
+    sortie
+        tableau grille # Le tableau demandé
+début
+    grille <- tableau de 6 par 7 # on crée un tableau de 6x7
+    pour rowIndex allant de 0 à 6:
+        pour colIndex allant de 0 à 7:
+            # on prend deux index changeant de valeur entre 0 et les valeurs des lignes et colonnes pour pouvoir se déplacer dans tout le tableau
+            grille[colIndex][rowIndex] <- 0 # on donne donc à chaque case la valeur 0
+        fin_pour
+    fin_pour
+    return grille
+fin

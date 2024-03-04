@@ -1,0 +1,10 @@
+programme principal
+variables
+    interne
+        tableau tableau # le tableau de jeu
+début
+    # on initialise le tableau de jeu
+    tableau <- grille_init()
+    # on lance la boucle de jeu
+    jouer(tableau)
+fin

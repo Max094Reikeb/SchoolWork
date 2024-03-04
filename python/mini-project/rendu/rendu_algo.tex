@@ -1,0 +1,128 @@
+%! Author = Maxence BEKIER
+%! Date = 29/10/2022
+
+% Preamble
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage[document]{ragged2e}
+\usepackage{algo}
+\usepackage[utf8]{inputenc}
+\usepackage[cyr]{aeguill}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage[francais]{babel}
+\usepackage{pdfpages}
+\usepackage{listings}
+\inputencoding{utf8}
+
+% Custom colors
+\definecolor{mygreen}{RGB}{28,172,0}
+\definecolor{mylilas}{RGB}{170,55,241}
+
+% Titles
+\mainTitle{DU Développeur niveau II}
+\logoDepartment{\includegraphics[width=3.0\textwidth]{logo_departement_si}}
+\secondTitle{Algorithmique et Python\\ Mini projet : puissance 4}
+
+% Document
+\begin{document}
+
+    \thispagestyle{plain}
+
+    \maketitle
+
+    \vspace{1.5cm}
+
+    \lstset{language=Python,
+        backgroundcolor=\color{cyan!10},
+        breaklines=true,
+        morekeywords={matlab2tikz},
+        keywordstyle=\color{blue},
+        morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+        identifierstyle=\color{black},
+        stringstyle=\color{mylilas},
+        commentstyle=\color{mygreen},
+        showstringspaces=false,
+        numbers=left,
+        numberstyle={\tiny \color{black}},
+        numbersep=9pt,
+        emph=[1]{for,end,break},emphstyle=[1]\color{red},
+        linewidth=16cm,
+        inputencoding=utf8,
+        extendedchars=true,
+        literate={á}{{\'a}}1  {é}{{\'e}}1  {í}{{\'i}}1 {ó}{{\'o}}1  {ú}{{\'u}}1
+            {Á}{{\'A}}1  {É}{{\'E}}1  {Í}{{\'I}}1 {Ó}{{\'O}}1  {Ú}{{\'U}}1
+            {à}{{\`a}}1  {è}{{\`e}}1  {ì}{{\`i}}1 {ò}{{\`o}}1  {ù}{{\`u}}1
+            {À}{{\`A}}1  {È}{{\'E}}1  {Ì}{{\`I}}1 {Ò}{{\`O}}1  {Ù}{{\`U}}1
+            {ä}{{\"a}}1  {ë}{{\"e}}1  {ï}{{\"i}}1 {ö}{{\"o}}1  {ü}{{\"u}}1
+            {Ä}{{\"A}}1  {Ë}{{\"E}}1  {Ï}{{\"I}}1 {Ö}{{\"O}}1  {Ü}{{\"U}}1
+            {â}{{\^a}}1  {ê}{{\^e}}1  {î}{{\^i}}1 {ô}{{\^o}}1  {û}{{\^u}}1
+            {Â}{{\^A}}1  {Ê}{{\^E}}1  {Î}{{\^I}}1 {Ô}{{\^O}}1  {Û}{{\^U}}1
+            {œ}{{\oe}}1  {Œ}{{\OE}}1  {æ}{{\ae}}1 {Æ}{{\AE}}1  {ß}{{\ss}}1
+            {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1  {Ø}{{\O}}1   {å}{{\r a}}1
+            {Å}{{\r A}}1 {ã}{{\~a}}1  {õ}{{\~o}}1 {Ã}{{\~A}}1  {Õ}{{\~O}}1
+            {ñ}{{\~n}}1  {Ñ}{{\~N}}1  {¿}{{?`}}1  {¡}{{!`}}1
+            {°}{{\textdegree}}1 {º}{{\textordmasculine}}1 {ª}{{\textordfeminine}}1,
+    }
+
+    \textbf{grille\_init(): fontion qui renvoie un tableau de 6 lignes et 7 colonnes remplies de zéros}
+    \lstinputlisting{codes/exo1.txt}
+
+    \newpage
+
+    \textbf{affiche\_grille(tableau): fonction qui affiche la grille du jeu dans la console de la facon la plus esthétique possible}
+    \lstinputlisting{codes/exo2.txt}
+
+    \newpage
+
+    \textbf{colonne\_libre(tableau, colonne): fonction qui renvoie un booléen indiquant s’il est possible de mettre un jeton dans la colonne}
+    \lstinputlisting{codes/exo3.txt}
+
+    \vspace{1.0cm}
+
+    \textbf{place\_jeton(tableau, colonne, joueur): fonction qui place un jeton du joueur (1 ou 2) dans la colonne. Elle renvoie la grille modifiée}
+    \lstinputlisting{codes/exo4.txt}
+
+    \newpage
+
+    \textbf{horizontale(tab, joueur): fonction qui renvoie True si le joueur a au moins 4 jetons alignés dans une ligne}
+    \lstinputlisting{codes/exo5.txt}
+
+    \vspace{1.0cm}
+
+    \textbf{verticale(tableau, joueur): fonction qui renvoie True si le joueur a au moins 4 jetons alignés dans une colonne}
+    \lstinputlisting{codes/exo6.txt}
+
+    \newpage
+
+    \textbf{diagonale(tableau, joueur): fonction qui renvoie True si le joueur a au moins 4 jetons alignés dans une diagonale}
+    \lstinputlisting{codes/exo7.txt}
+
+    \vspace{1.0cm}
+
+    \textbf{gagne(tableau, joueur): fonction qui renvoie True si le joueur a gagné}
+    \lstinputlisting{codes/exo8.txt}
+
+    \newpage
+
+    \textbf{egalite(tableau): fonction qui renvoie True s’il y a égalité et False sinon}
+    \lstinputlisting{codes/exo9.txt}
+
+    \newpage
+
+    \textbf{tour\_joueur(tableau, joueur): fonction qui permet au joueur de placer un jeton dans la colonne choisie. Elle indique si la colonne est pleine et permet alors au joueur de choisir une autre colonne}
+    \lstinputlisting{codes/exo10.txt}
+
+    \newpage
+
+    \textbf{jouer(tableau): fonction qui permet aux deux joueurs de jouer chacun leur tour. Elle vérifie que les joueurs n’ont pas gagné à la fin de leur tour. Si l’un des deux a gagné ou s’il y a égalité, elle donne le résultat.}
+    \lstinputlisting{codes/exo11.txt}
+
+    \newpage
+
+    \textbf{Programme principal}
+    \lstinputlisting{codes/exo12.txt}
+
+\end{document}

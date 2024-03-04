@@ -1,0 +1,27 @@
+fonction verticale(tableau, joueur) -> Booléen
+variables
+    entrée
+        tableau tableau # le tableau à vérifier
+        entier joueur # le joueur dont on vérifie la victoire
+    interne
+        tableau colonnes # tableau représentant la colonne actuelle
+        entier colIndex # index de déplacement sur les colonnes
+        entier item # index de déplacement sur la colonne
+début
+    # on fait 1 tableau pour prendre les colonnes
+    colonnes <- tableau à 1 dimension, de taille 7
+    pour colIndex allant de 0 à 7: # on se déplace sur la colonne
+        # on ajoute dans le même tableau d'une dimension toutes les colonnes
+        colonnes[colIndex] <- colonnes[colIndex] + string(tableau[colIndex])
+    fin_pour
+    # on cherche si les tableaux contiennent les patternes "1111" ou "2222" pour indiquer la victoire des joueurs
+    pour chaque item dans colonnes:
+        si item contient "1111" et le joueur == 1:
+            return True
+        fin_si
+        si item contient "2222" et le joueur == 2:
+            return True
+        fin_si
+    fin_pour
+    return False
+fin

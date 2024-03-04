@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Langage - Plankalkül</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/documents.css">
+</head>
+<body>
+<div id="wrapper" class="divided">
+
+    <!-- Navigation -->
+    <nav id="nav">
+        <ul class="container">
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="#top">Présentation</a></li>
+            <li><a href="#exemple">Exemple</a></li>
+            <li><a href="#informations">Informations</a></li>
+            <li><a href="#liens">Liens</a></li>
+        </ul>
+    </nav>
+
+    <section class="wrapper style1 align-center">
+        <div id="top" class="inner">
+            <h2>Plankalkül</h2>
+            <p>
+                Plankalkül est un langage de programmation, conçu de 1942 à 1946 par l'Allemand Konrad Zuse.
+            </p>
+            <div class="index align-left">
+
+                <!-- Contexte -->
+                <section>
+                    <header>
+                        <h3>Contexte</h3>
+                    </header>
+                    <div class="content">
+                        <p>
+                            <span class="image left">
+                                <img src="../images/zuse.jpg" alt="">
+                            </span>
+                            À l'époque, Zuse ne fit aucune communication scientifique à ce sujet, pour diverses raisons
+                            : la Seconde Guerre mondiale faisait rage, et il consacrait tous ses efforts à la conception
+                            et à la commercialisation de son ordinateur, le Zuse 3.
+                            <br/>
+                            La première publication mentionnant Plankalkül date de 1948. En 1975, il fut décrit et
+                            implémenté à l'occasion de la thèse de J. Hohmann. Le premier compilateur, proposé par
+                            l'université libre de Berlin, a été achevé en 2000, soit cinq ans après la mort de Zuse.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Description -->
+                <section>
+                    <header>
+                        <h3>Description</h3>
+                    </header>
+                    <div class="content">
+                        <p>
+                            <span class="image right">
+                                <img width="250" height="286" src="../images/plankalkul.jpg" alt="">
+                            </span>
+                            D'après Zuse, Plankalkül est le premier langage de haut niveau.
+                            <br/>
+                            Ce langage eut pourtant le même destin malheureux que son créateur : ainsi il était
+                            extrêmement innovant, mais en dehors du courant principal, mondial, du développement de
+                            l'informatique. Il demeura donc très largement inconnu.
+                            <br/>
+                            Ce langage présente une innovation rare, voire unique, pour un langage informatique : les
+                            programmes s'écrivent en deux dimensions, de la même façon que la notation algébrique. Il
+                            est donc plus proche des traditions du plan et de la formule que de celles de la prose et du
+                            récit.
+                            <br/>
+                            Pour ces raisons, certains le rapprochent même des langages à objet dont il serait un
+                            ancêtre, à un niveau intermédiaire entre ces derniers et l'algèbre classique.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Exemple -->
+                <section id="exemple">
+                    <header>
+                        <h3>Exemple</h3>
+                    </header>
+                    <div class="content">
+                        <p>
+                            Le programme ci-dessous calcule le maximum de trois variables en appelant la fonction max :
+                        </p>
+                        <pre>
+                            <code>P1 max3 (V0[:8.0], V1[:8.0], V2[:8.0]) => R0[:8.0]
+max(V0[:8.0], V1[:8.0]) => Z1[:8.0]
+max(Z1[:8.0], V2[:8.0]) => R0[:8.0]
+END
+P2 max (V0[:8.0], V1[:8.0]) => R0[:8.0]
+V0[:8.0] => Z1[:8.0]
+(Z1[:8.0] < V1[:8.0]) → V1[:8.0] => Z1[:8.0]
+Z1[:8.0] => R0[:8.0]
+END
+                            </code>
+                        </pre>
+                    </div>
+                </section>
+
+                <!-- Table d'informations -->
+                <section id="informations">
+                    <header>
+                        <h3>Informations</h3>
+                    </header>
+                    <div class="content">
+                        <div class="table-wrapper">
+                            <table class="alt">
+                                <tbody>
+                                <tr>
+                                    <td>Créateur</td>
+                                    <td>Konrad Zuse</td>
+                                </tr>
+                                <tr>
+                                    <td>Date de création</td>
+                                    <td>1942-1946</td>
+                                </tr>
+                                <tr>
+                                    <td>OS</td>
+                                    <td>Langage de programmation d'ordinateur</td>
+                                </tr>
+                                <tr>
+                                    <td>Niveau de langage</td>
+                                    <td>Haut</td>
+                                </tr>
+                                <tr>
+                                    <td>Source</td>
+                                    <td><a href="https://fr.wikipedia.org/wiki/Plankalkül">Wikipédia</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Liens -->
+                <section id="liens">
+                    <header>
+                        <h3>Liens externes</h3>
+                    </header>
+                    <div class="content">
+                        <ul class="actions fit">
+                            <li><a href="https://dl.acm.org/doi/10.1145/361454.361515" class="button primary fit">Article
+                                digital</a></li>
+                            <li>
+                                <a href="https://web.archive.org/web/20141018204625/http://www.zib.de/zuse/Inhalt/Programme/Plankalkuel/Plankalkuel-Report/Plankalkuel-Report.htm"
+                                   class="button primary fit">Archive web</a></li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+
+    <!-- Crédits -->
+    <footer class="wrapper style1 align-center">
+        <div class="inner">
+            <p>&copy; Mini Projet 1. Design: BEKIER Maxence.</p>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

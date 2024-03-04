@@ -1,0 +1,7 @@
+Nom: BEKIER
+Prénom : Maxence
+
+- J'ai essayé d'utiliser différents sélecteurs et transitions.
+- Considérant que c'est ma création, j'ai utilisé des bouts de code d'anciens projets HTML/CSS que j'ai fait
+dans le passé.
+- Utilisant une police custom, vous assurez-vous d'avoir une connexion internet en ouvrant mon projet.

@@ -1,0 +1,46 @@
+fonction diagonale(tableau, joueur) -> Booléen
+variables
+    entrée
+        tableau tableau # le tableau à vérifier
+        entier joueur # le joueur dont on vérifie la victoire
+    interne
+        entier y # index de déplacement sur les lignes
+        entier x # index de déplacement sur les colonnes
+        entier xx # index de déplacement
+        chaine diag # chaine pour détecter les patternes
+début
+    pour y allant de 0 à 3:
+        pour x allant de 0 à 4:
+            # on se déplace sur la première partie du tableau avec la courte diagonale
+            diag <- ""
+            pour xx allant de 0 à 4:
+                # on se déplace sur le côté (la diagonale quoi)
+                diag <- diag + string(tableau[x+xx][y+xx])
+            fin_pour
+            # on regarde si le patterne est présent et bon
+            si diag == "1111" et joueur == 1:
+                return True
+            fin_si
+            si diag == "2222" et joueur == 2:
+                return True
+            fin_si
+        fin_pour
+    fin_pour
+    pour y allant de 0 à 3:
+        pour x allant de 3 à 7:
+            # on se déplace sur la deuxième partie du tableau avec la longue diagonale
+            diag <- ""
+            pour xx allant de 0 à 4:
+                # on se déplace sur le côté (la diagonale quoi)
+                diag <- diag + string(tableau[x-xx][y+xx])
+            fin_pour
+            # on regarde si le patterne est présent et bon
+            si diag == "1111" et joueur == 1:
+                return True
+            fin_si
+            si diag == "2222" et joueur == 2:
+                return True
+            fin_si
+        fin_pour
+    fin_pour
+fin

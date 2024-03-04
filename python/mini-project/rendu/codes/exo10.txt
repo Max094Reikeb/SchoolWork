@@ -1,0 +1,24 @@
+fonction tour_joueur(tableau, joueur) -> Tableau
+variables
+    entrée
+        tableau tableau # le tableau de jeu
+        entier joueur # le joueur qui joue
+    interne
+        entier colonne # colonne où placer son pion
+début
+    afficher("\nC'est à ton tour joueur {joueur}, dans quelle colonne veux-tu déposer ton pion ?")
+    # boucle infinie qui ne sera cassée que quand on le voudra
+    tant que 1:
+        afficher(">>> ")
+        # on demande au joueur la colonne où il veut poser son pion
+        colonne <- saisir(int())
+        # on vérifie que la colonne est libre
+        si colonne_libre(tableau, colonne - 1):
+            return place_jeton(tableau, colonne - 1, joueur)
+            sortir tant_que # on peut casser la boucle
+        sinon:
+            # sinon, on lui dit que la colonne est pas libre, et la boucle recommence
+            afficher("\nLa colonne {colonne} n'est pas libre ! Choisis-en une autre...")
+        fin_si
+    fin_tan_que
+fin

@@ -1,0 +1,15 @@
+fonction colonne_libre(tableau, colonne) -> Booléen
+variables
+    entrée
+        tableau tableau # le tableau à vérifier
+        entier colonne # la colonne à vérifier
+    interne
+        entier rowIndex # index de déplacement sur les lignes
+début
+    pour rowIndex allant de 0 à 6: # on se déplace sur les lignes
+        si tableau[colonne][rowIndex] == 0:
+            return true # si on rencontre un 0, alors libre
+        fin_si
+    fin_pour
+    return false # si on rencontre pas de 0, alors pas libre
+fin

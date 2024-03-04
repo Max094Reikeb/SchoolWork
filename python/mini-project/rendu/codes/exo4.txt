@@ -1,0 +1,18 @@
+fonction place_jeton(tableau, colonne, joueur) -> Tableau
+variables
+    entrée
+        tableau tableau # le tableau à modifier
+        entier colonne # la colonne à modifier
+        entier joueur # le joueur qui place le jeton
+    interne
+        entier rowIndex # index de déplacement sur les lignes
+début
+    pour rowIndex allant de 0 a 7: # on se déplace sur les lignes
+        si tableau[colonne][rowIndex] == 0:
+        # dès qu'on trouve un emplacement libre, on met le pion
+            tableau[colonne][rowIndex] <- joueur
+            casser_pour
+        fin_si
+    fin_pour
+    return tableau
+fin

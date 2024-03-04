@@ -1,0 +1,264 @@
+/*
+ FICHIER CSS EXCLUSIF AU SOMMAIRE
+ */
+
+.banner.style1 {
+    -moz-align-items: -moz-stretch;
+    -webkit-align-items: -webkit-stretch;
+    -ms-align-items: -ms-stretch;
+    align-items: stretch;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    -moz-flex-direction: row;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -moz-justify-content: -moz-flex-end;
+    -webkit-justify-content: -webkit-flex-end;
+    -ms-justify-content: -ms-flex-end;
+    justify-content: flex-end;
+    position: relative;
+    text-align: left;
+    overflow-x: hidden;
+}
+
+.banner.style1 .content {
+    padding: 7rem 7rem 5rem 7rem;
+    -moz-align-self: center;
+    -webkit-align-self: center;
+    -ms-align-self: center;
+    align-self: center;
+    -moz-flex-grow: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-grow: 1;
+    flex-grow: 1;
+    -moz-flex-shrink: 1;
+    -webkit-flex-shrink: 1;
+    -ms-flex-shrink: 1;
+    flex-shrink: 1;
+    width: 50%;
+    max-width: 48rem;
+    margin: 0 auto;
+}
+
+.banner.style1 .image {
+    -moz-flex-grow: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-grow: 0;
+    flex-grow: 0;
+    -moz-flex-shrink: 0;
+    -webkit-flex-shrink: 0;
+    -ms-flex-shrink: 0;
+    flex-shrink: 0;
+    border-radius: 0;
+    width: 50%;
+}
+
+.banner.style1 .image img {
+    -moz-object-fit: cover;
+    -webkit-object-fit: cover;
+    -ms-object-fit: cover;
+    object-fit: cover;
+    -moz-object-position: center;
+    -webkit-object-position: center;
+    -ms-object-position: center;
+    object-position: center;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+.banner.style1.fullscreen {
+    min-height: 100vh;
+}
+
+.banner.style1.orient-right {
+    -moz-flex-direction: row-reverse;
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+}
+
+.banner.style1.content-align-center {
+    text-align: center;
+}
+
+.banner.style1.content-align-right {
+    text-align: right;
+}
+
+.banner.style1.image-position-left .image img {
+    -moz-object-position: left;
+    -webkit-object-position: left;
+    -ms-object-position: left;
+    object-position: left;
+}
+
+image-position-right .image img {
+    -moz-object-position: right;
+    -webkit-object-position: right;
+    -ms-object-position: right;
+    object-position: right;
+}
+
+.spotlight.style1 {
+    -moz-align-items: -moz-stretch;
+    -webkit-align-items: -webkit-stretch;
+    -ms-align-items: -ms-stretch;
+    align-items: stretch;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    -moz-flex-direction: row;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -moz-justify-content: -moz-flex-end;
+    -webkit-justify-content: -webkit-flex-end;
+    -ms-justify-content: -ms-flex-end;
+    justify-content: flex-end;
+    position: relative;
+    overflow-x: hidden;
+    text-align: left;
+}
+
+.spotlight.style1 .content {
+    padding: 7rem 7rem 5rem 7rem;
+    -moz-align-self: center;
+    -webkit-align-self: center;
+    -ms-align-self: center;
+    align-self: center;
+    -moz-flex-grow: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-grow: 1;
+    flex-grow: 1;
+    -moz-flex-shrink: 1;
+    -webkit-flex-shrink: 1;
+    -ms-flex-shrink: 1;
+    flex-shrink: 1;
+    width: 65%;
+    max-width: 64rem;
+    margin: 0 auto;
+}
+
+.spotlight.style1 .image {
+    -moz-flex-grow: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-grow: 0;
+    flex-grow: 0;
+    -moz-flex-shrink: 0;
+    -webkit-flex-shrink: 0;
+    -ms-flex-shrink: 0;
+    flex-shrink: 0;
+    width: 35%;
+    min-width: 25rem;
+    border-radius: 0;
+}
+
+.spotlight.style1 .image img {
+    -moz-object-fit: cover;
+    -webkit-object-fit: cover;
+    -ms-object-fit: cover;
+    object-fit: cover;
+    -moz-object-position: center;
+    -webkit-object-position: center;
+    -ms-object-position: center;
+    object-position: center;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+.spotlight.style1.orient-right {
+    -moz-flex-direction: row-reverse;
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+}
+
+.spotlight.style1.content-align-center {
+    text-align: center;
+}
+
+.spotlight.style1.content-align-right {
+    text-align: right;
+}
+
+.spotlight.style1.image-position-left .image img {
+    -moz-object-position: left;
+    -webkit-object-position: left;
+    -ms-object-position: left;
+    object-position: left;
+}
+
+.spotlight.style1.image-position-right .image img {
+    -moz-object-position: right;
+    -webkit-object-position: right;
+    -ms-object-position: right;
+    object-position: right;
+}
+
+.spotlight .image {
+    background-color: rgba(0, 0, 0, 0.125);
+}
+
+.spotlight.invert .image {
+    background-color: rgba(255, 255, 255, 0.125);
+}
+
+.spotlight.style3 .image {
+    border-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-width: 0;
+}
+
+.spotlight.style3 .image:before {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='64px' height='32px' viewBox='0 0 64 32' zoomAndPan='disable'%3E%3Cstyle%3Erect %7Bfill: transparent%3B stroke: rgba(0, 0, 0, 0.2)%3B stroke-width: 1px%3B %7D%3C/style%3E%3Crect rx='4' ry='4' x='11' y='12' width='42' height='8' vector-effect='non-scaling-stroke' /%3E%3C/svg%3E");
+    border-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+.spotlight.style3 .image:after {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='64px' height='32px' viewBox='0 0 64 32' zoomAndPan='disable'%3E%3Cstyle%3Ecircle %7Bfill: transparent%3B stroke: rgba(0, 0, 0, 0.2)%3B stroke-width: 1px%3B %7D%3C/style%3E%3Ccircle cx='32' cy='16' r='14' vector-effect='non-scaling-stroke' /%3E%3C/svg%3E");
+    border-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+.spotlight.style3.android .image:after {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='64px' height='32px' viewBox='0 0 64 32' zoomAndPan='disable'%3E%3Cstyle%3Erect %7Bfill: transparent%3B stroke: rgba(0, 0, 0, 0.2)%3B stroke-width: 1px%3B %7D%3C/style%3E%3Crect rx='4' ry='4' x='6' y='4' width='52' height='24' vector-effect='non-scaling-stroke' /%3E%3C/svg%3E");
+}
+
+.spotlight.style3.invert .image {
+    border-color: white;
+    background-color: white;
+    border-width: 1px;
+}
+
+.spotlight.style3.invert .image:before {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='64px' height='32px' viewBox='0 0 64 32' zoomAndPan='disable'%3E%3Cstyle%3Erect %7Bfill: transparent%3B stroke: white%3B stroke-width: 1px%3B %7D%3C/style%3E%3Crect rx='4' ry='4' x='11' y='12' width='42' height='8' vector-effect='non-scaling-stroke' /%3E%3C/svg%3E");
+    border-color: white;
+    width: calc(100% + 2px);
+    margin-left: -1px;
+}
+
+.spotlight.style3.invert .image:after {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='64px' height='32px' viewBox='0 0 64 32' zoomAndPan='disable'%3E%3Cstyle%3Ecircle %7Bfill: transparent%3B stroke: white%3B stroke-width: 1px%3B %7D%3C/style%3E%3Ccircle cx='32' cy='16' r='14' vector-effect='non-scaling-stroke' /%3E%3C/svg%3E");
+    border-color: white;
+    width: calc(100% + 2px);
+    margin-left: -1px;
+}
+
+.spotlight.style3.invert.android .image:after {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='64px' height='32px' viewBox='0 0 64 32' zoomAndPan='disable'%3E%3Cstyle%3Erect %7Bfill: transparent%3B stroke: white%3B stroke-width: 1px%3B %7D%3C/style%3E%3Crect rx='4' ry='4' x='6' y='4' width='52' height='24' vector-effect='non-scaling-stroke' /%3E%3C/svg%3E");
+}

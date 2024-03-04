@@ -1,0 +1,28 @@
+fonction egalite(tableau) -> Booléen
+variables
+    entrée
+        tableau tableau # le tableau à vérifier
+début
+    # on vérifie que la grille soit pleine et qu'aucun joueur n'aie gagné
+    return grille_pleine(tableau) et non(gagne(tableau, 1)) et non(gagne(tableau, 2))
+fin
+
+
+fonction grille_pleine(tableau) -> Booléen
+variables
+    entrée
+        tableau tableau # le tableau à vérifier
+    interne
+        entier rowIndex # index de déplacement de ligne
+        entier colIndex # index de déplacement de colonne
+début
+    pour rowIndex allant de 0 à 6:
+        pour colIndex allant de 0 à 7:
+            # on se déplace dans tout le tableau avec les index
+            si tableau[colIndex][rowIndex] == 0:
+                # il ne suffit que d'1 "0" pour dire que la grille n'est pas pleine
+                return False
+            fin_si
+        fin_pour
+    fin_pour
+fin
