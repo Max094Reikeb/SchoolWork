@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="screenBackground">#15232E</color>
+    <color name="orange">#FF8100</color>
+    <color name="cardBackground">#1E3243</color>
+    <color name="elementCardBackground">#284C6A</color>
+    <color name="seeMoreBackground">#0F1921</color>
+    <color name="bottomBarBackground">#0F1E2B</color>
+    <color name="selectedBottomBarBackground">#12273C</color>
+    <color name="selectedBottomBarText">#12273C</color>
+    <color name="bottomBarText">#778BA8</color>
+
+</resources>
