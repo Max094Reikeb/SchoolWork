@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:dart_project/dart_project.dart' as dart_project;
-
 void main(List<String> arguments) {
   // MARK: Null
   int? num = 12;

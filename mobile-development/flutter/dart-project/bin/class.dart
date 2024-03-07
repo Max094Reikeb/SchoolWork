@@ -1,7 +1,3 @@
-import 'dart:io';
-
-import 'package:dart_project/dart_project.dart' as dart_project;
-
 void main(List<String> arguments) {
   // Vehicle v1 = Vehicle(100, 5);
   // print(v1.toString()); // Instance of 'Vehicle'

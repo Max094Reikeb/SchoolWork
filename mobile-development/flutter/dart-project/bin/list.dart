@@ -1,7 +1,3 @@
-import 'dart:io';
-
-import 'package:dart_project/dart_project.dart' as dart_project;
-
 void main(List<String> arguments) {
   List<int> l1 = [25, 42, 79, 12];
   l1.sort((b, a) => a.compareTo(b));
