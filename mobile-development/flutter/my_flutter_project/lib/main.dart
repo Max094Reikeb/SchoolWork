@@ -1,19 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:my_flutter_project/app_colors.dart';
 import 'package:my_flutter_project/app_icons.dart';
 import 'package:my_flutter_project/complete_app.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final GoRouter _router = GoRouter(routes: [
+    GoRoute(
+        path: '/',
+        builder: (BuildContext context, GoRouterState state) {
+          return const AddCardScreen();
+        }),
+    GoRoute(
+        path: '/product',
+        builder: (BuildContext context, GoRouterState state) {
+          return const ProductInfo();
+        })
+  ]);
+
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: _router,
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: AppColors.blue,
@@ -62,7 +77,6 @@ class MyApp extends StatelessWidget {
           type: BottomNavigationBarType.fixed,
         ),
       ),
-      home: const ProductInfo(),
     );
   }
 }
@@ -94,7 +108,9 @@ class AddCardScreen extends StatelessWidget {
             ),
             SizedBox(height: height * 0.1),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).push('/product');
+              },
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.blue,
                 shape: const RoundedRectangleBorder(
