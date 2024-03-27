@@ -17,7 +17,8 @@ class ProductApiManager {
   final ProductAPI _api =
       ProductAPI(Dio(), baseUrl: 'https://api.formation-android.fr/v2/');
 
-  Future<ProductResponse> getProduct(String barcode) async {
+  Future<ProductResponse> getProduct(String barcode) {
+    assert(barcode.trim().isNotEmpty);
     return _api.loadProduct(barcode);
   }
 }

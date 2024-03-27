@@ -1,26 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_flutter_project/product_bloc.dart';
 
 import 'Product.dart';
 import 'app_colors.dart';
 import 'app_icons.dart';
 
-class ProductInfo extends StatefulWidget {
-  static const double kImageHeight = 300.0;
-
+class ProductInfo extends StatelessWidget {
   const ProductInfo({super.key});
 
   @override
-  State<ProductInfo> createState() => _ProductInfoState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: BlocProvider(
+        create: (_) => ProductBlock(),
+        child: BlocBuilder<ProductBlock, ProductState>(
+          builder: (BuildContext context, ProductState state) {
+            if (state.product == null) {
+              return const CircularProgressIndicator();
+            } else {
+              return ProductData(
+                product: state.product!,
+                child: const ProductInfoWidthData(),
+              );
+            }
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class ProductInfoWidthData extends StatefulWidget {
+  static const double kImageHeight = 300.0;
+
+  const ProductInfoWidthData({super.key});
+
+  @override
+  State<ProductInfoWidthData> createState() => _ProductInfoState();
 }
 
 double _scrollProgress(BuildContext context) {
   ScrollController? controller = PrimaryScrollController.of(context);
   return !controller.hasClients
       ? 0
-      : (controller.position.pixels / ProductInfo.kImageHeight).clamp(0, 1);
+      : (controller.position.pixels / ProductInfoWidthData.kImageHeight)
+          .clamp(0, 1);
 }
 
-class _ProductInfoState extends State<ProductInfo> {
+class _ProductInfoState extends State<ProductInfoWidthData> {
   double _currentScrollProgress = 0.0;
 
   // Quand on scroll, on redraw pour changer la couleur de l'image
@@ -45,15 +73,16 @@ class _ProductInfoState extends State<ProductInfo> {
       child: Scaffold(
         body: SizedBox.expand(
           child: Stack(children: [
-            Image.network(
-              // TODO
-              generateFakeProduct().picture ?? '',
-              width: double.infinity,
-              height: ProductInfo.kImageHeight,
-              fit: BoxFit.cover,
-              color: Colors.black.withOpacity(_currentScrollProgress),
-              colorBlendMode: BlendMode.srcATop,
-            ),
+            Builder(builder: (context) {
+              return Image.network(
+                ProductData.of(context).product.picture ?? '',
+                width: double.infinity,
+                height: ProductInfoWidthData.kImageHeight,
+                fit: BoxFit.cover,
+                color: Colors.black.withOpacity(_currentScrollProgress),
+                colorBlendMode: BlendMode.srcATop,
+              );
+            }),
             Positioned.fill(
               child: SingleChildScrollView(
                 controller: scrollController,
@@ -62,7 +91,7 @@ class _ProductInfoState extends State<ProductInfo> {
                   trackVisibility: true,
                   child: Container(
                     margin: const EdgeInsetsDirectional.only(
-                      top: ProductInfo.kImageHeight - 30.0,
+                      top: ProductInfoWidthData.kImageHeight - 30.0,
                     ),
                     child: const _Body(),
                   ),
@@ -73,6 +102,28 @@ class _ProductInfoState extends State<ProductInfo> {
         ),
       ),
     );
+  }
+}
+
+class ProductData extends InheritedWidget {
+  const ProductData({
+    super.key,
+    required super.child,
+    required this.product,
+  });
+
+  final Product product;
+
+  static ProductData of(BuildContext context) {
+    final ProductData? result =
+        context.dependOnInheritedWidgetOfExactType<ProductData>();
+    assert(result != null, 'No ProductData found in context');
+    return result!;
+  }
+
+  @override
+  bool updateShouldNotify(ProductData oldWidget) {
+    return oldWidget.product != product;
   }
 }
 
@@ -185,8 +236,7 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    // TODO
-    final Product product = generateFakeProduct();
+    final Product product = BlocProvider.of<ProductBlock>(context).state.product!;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
