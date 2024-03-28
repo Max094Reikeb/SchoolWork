@@ -20,34 +20,60 @@ class ProductResponse {
         barcode: response.barcode,
         name: response.name,
         altName: response.altName,
-        picture: response.pictures.product,
+        picture: response.pictures?.product,
         quantity: response.quantity,
         brands: response.brands,
+        sellingCountries: response.sellingCountries,
         manufacturingCountries: response.manufacturingCountries,
         nutriScore: switch (response.nutriScore) {
           DataNutriScore.A => ProductNutriscore.A,
           DataNutriScore.B => ProductNutriscore.B,
           DataNutriScore.C => ProductNutriscore.C,
           DataNutriScore.D => ProductNutriscore.D,
-          DataNutriScore.E => ProductNutriscore.E
+          DataNutriScore.E => ProductNutriscore.E,
+          null => throw UnimplementedError()
         },
         novaScore: switch (response.novaScore) {
           DataNovaScore.Group1 => ProductNovaScore.Group1,
           DataNovaScore.Group2 => ProductNovaScore.Group2,
           DataNovaScore.Group3 => ProductNovaScore.Group3,
-          DataNovaScore.Group4 => ProductNovaScore.Group4
+          DataNovaScore.Group4 => ProductNovaScore.Group4,
+          null => throw Exception('Unknown nova group!')
         },
         ecoScore: switch (response.ecoScore) {
           DataEcoScore.A => ProductEcoScore.A,
           DataEcoScore.B => ProductEcoScore.B,
           DataEcoScore.C => ProductEcoScore.C,
           DataEcoScore.D => ProductEcoScore.D,
-          DataEcoScore.E => ProductEcoScore.E
+          DataEcoScore.E => ProductEcoScore.E,
+          null => throw Exception('Unknown nova group!')
         },
-        ingredients: response.ingredients.list,
-        traces: response.traces.list,
-        allergens: response.allergens.list,
-        additives: response.additives);
+        ingredients: response.ingredients?.list,
+        traces: response.traces?.list,
+        allergens: response.allergens?.list,
+        additives: response.additives,
+        analysis: ProductAnalysis(
+            palmOil: switch (response.analysis?.palmOil) {
+              DataAnalysisStatus.Yes => AnalysisStatus.Yes,
+              DataAnalysisStatus.No => AnalysisStatus.No,
+              DataAnalysisStatus.Maybe => AnalysisStatus.Maybe,
+              DataAnalysisStatus.Unknown => AnalysisStatus.Unknown,
+              null => throw UnimplementedError()
+            },
+            vegan: switch (response.analysis?.vegan) {
+              DataAnalysisStatus.Yes => AnalysisStatus.Yes,
+              DataAnalysisStatus.No => AnalysisStatus.No,
+              DataAnalysisStatus.Maybe => AnalysisStatus.Maybe,
+              DataAnalysisStatus.Unknown => AnalysisStatus.Unknown,
+              null => throw UnimplementedError()
+            },
+            vegetarian: switch (response.analysis?.vegetarian) {
+              DataAnalysisStatus.Yes => AnalysisStatus.Yes,
+              DataAnalysisStatus.No => AnalysisStatus.No,
+              DataAnalysisStatus.Maybe => AnalysisStatus.Maybe,
+              DataAnalysisStatus.Unknown => AnalysisStatus.Unknown,
+              null => throw UnimplementedError()
+            }));
   }
 
   @override
@@ -59,30 +85,29 @@ class ProductResponse {
 @JsonSerializable(explicitToJson: true)
 class ProductResponseData {
   final String barcode;
-  final String name;
-  final String altName;
-  final DataPictures pictures;
-  final String quantity;
-  final List<String> brands;
-  final List<String> stores;
-  final List<String> manufacturingCountries;
+  final String? name;
+  final String? altName;
+  final DataPictures? pictures;
+  final String? quantity;
+  final List<String>? brands;
+  final List<String>? stores;
+  @JsonKey(name: 'countries')
+  final List<String>? sellingCountries;
+  final List<String>? manufacturingCountries;
   @JsonKey(name: 'nutriScore')
-  final DataNutriScore nutriScore;
+  final DataNutriScore? nutriScore;
   @JsonKey(name: 'novaScore')
-  final DataNovaScore novaScore;
+  final DataNovaScore? novaScore;
   @JsonKey(name: 'ecoScoreGrade')
-  final DataEcoScore ecoScore;
-  final DataIngredients ingredients;
-  final DataTraces traces;
-  final DataAllergens allergens;
+  final DataEcoScore? ecoScore;
+  final DataIngredients? ingredients;
+  final DataTraces? traces;
+  final DataAllergens? allergens;
 
   // @JsonKey(fromJson: additiveFromJSON, toJson: additiveToJSON)
   // final List<Additive> additives;
-  final Map<String, String> additives;
-
-  // nutrientLevels
-  // nutritionFacts
-  // ingredientsFromPalmOil
+  final Map<String, String>? additives;
+  final DataAnalysis? analysis;
 
   ProductResponseData(
       this.barcode,
@@ -92,6 +117,7 @@ class ProductResponseData {
       this.quantity,
       this.brands,
       this.stores,
+      this.sellingCountries,
       this.manufacturingCountries,
       this.nutriScore,
       this.novaScore,
@@ -99,7 +125,8 @@ class ProductResponseData {
       this.ingredients,
       this.traces,
       this.allergens,
-      this.additives);
+      this.additives,
+      this.analysis);
 
   factory ProductResponseData.fromJson(Map<String, dynamic> json) =>
       _$ProductResponseDataFromJson(json);
@@ -126,10 +153,10 @@ class ProductResponseData {
 
 @JsonSerializable(explicitToJson: true)
 class DataPictures {
-  final String product;
-  final String front;
-  final String ingredients;
-  final String nutrition;
+  final String? product;
+  final String? front;
+  final String? ingredients;
+  final String? nutrition;
 
   DataPictures(this.product, this.front, this.ingredients, this.nutrition);
 
@@ -141,8 +168,8 @@ class DataPictures {
 
 @JsonSerializable(explicitToJson: true)
 class DataIngredients {
-  final List<String> list;
-  final List<DataIngredientDetails> details;
+  final List<String>? list;
+  final List<DataIngredientDetails>? details;
 
   DataIngredients(this.list, this.details);
 
@@ -191,11 +218,11 @@ enum DataEcoScore {
 
 @JsonSerializable(explicitToJson: true)
 class DataIngredientDetails {
-  final bool vegan;
-  final bool vegetarian;
-  final bool containsPalmOil;
-  final String percent;
-  final String value;
+  final bool? vegan;
+  final bool? vegetarian;
+  final bool? containsPalmOil;
+  final String? percent;
+  final String? value;
 
   DataIngredientDetails(this.vegan, this.vegetarian, this.containsPalmOil,
       this.percent, this.value);
@@ -208,7 +235,7 @@ class DataIngredientDetails {
 
 @JsonSerializable(explicitToJson: true)
 class DataTraces {
-  final List<String> list;
+  final List<String>? list;
 
   DataTraces(this.list);
 
@@ -220,7 +247,7 @@ class DataTraces {
 
 @JsonSerializable(explicitToJson: true)
 class DataAllergens {
-  final List<String> list;
+  final List<String>? list;
 
   DataAllergens(this.list);
 
@@ -232,8 +259,8 @@ class DataAllergens {
 
 @JsonSerializable(explicitToJson: true)
 class DataAdditives {
-  final String name;
-  final String description;
+  final String? name;
+  final String? description;
 
   DataAdditives(this.name, this.description);
 
@@ -246,4 +273,29 @@ class DataAdditives {
   String toString() {
     return '$name : $description';
   }
+}
+
+enum DataAnalysisStatus {
+  @JsonValue('yes')
+  Yes,
+  @JsonValue('no')
+  No,
+  @JsonValue('maybe')
+  Maybe,
+  @JsonValue('unknown')
+  Unknown
+}
+
+@JsonSerializable(explicitToJson: true)
+class DataAnalysis {
+  final DataAnalysisStatus? palmOil;
+  final DataAnalysisStatus? vegan;
+  final DataAnalysisStatus? vegetarian;
+
+  DataAnalysis(this.palmOil, this.vegan, this.vegetarian);
+
+  factory DataAnalysis.fromJson(Map<String, dynamic> json) =>
+      _$DataAnalysisFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DataAnalysisToJson(this);
 }

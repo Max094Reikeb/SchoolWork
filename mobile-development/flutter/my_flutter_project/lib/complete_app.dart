@@ -7,13 +7,15 @@ import 'app_colors.dart';
 import 'app_icons.dart';
 
 class ProductInfo extends StatelessWidget {
-  const ProductInfo({super.key});
+  final String? barcode;
+
+  const ProductInfo({super.key, this.barcode});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
-        create: (_) => ProductBlock(),
+        create: (_) => ProductBlock(barcode!),
         child: BlocBuilder<ProductBlock, ProductState>(
           builder: (BuildContext context, ProductState state) {
             if (state.product == null) {
@@ -236,7 +238,8 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    final Product product = BlocProvider.of<ProductBlock>(context).state.product!;
+    final Product product =
+        BlocProvider.of<ProductBlock>(context).state.product!;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -289,14 +292,17 @@ class _Scores extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Expanded(
+              Expanded(
                 flex: 44,
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: EdgeInsetsDirectional.only(end: 5.0),
+                    padding: const EdgeInsetsDirectional.only(end: 5.0),
                     child: _Nutriscore(
-                      nutriscore: ProductNutriscore.A,
+                      nutriscore: BlocProvider.of<ProductBlock>(context)
+                          .state
+                          .product!
+                          .nutriScore,
                     ),
                   ),
                 ),
@@ -306,14 +312,17 @@ class _Scores extends StatelessWidget {
                 height: 100.0,
                 color: Theme.of(context).dividerColor,
               ),
-              const Expanded(
+              Expanded(
                 flex: 66,
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: EdgeInsetsDirectional.only(start: 25.0),
+                    padding: const EdgeInsetsDirectional.only(start: 25.0),
                     child: _NovaGroup(
-                      novaScore: ProductNovaScore.Group1,
+                      novaScore: BlocProvider.of<ProductBlock>(context)
+                          .state
+                          .product!
+                          .novaScore,
                     ),
                   ),
                 ),
@@ -324,13 +333,14 @@ class _Scores extends StatelessWidget {
         const Divider(
           height: 1.0,
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(
+        Padding(
+          padding: const EdgeInsets.symmetric(
             vertical: _verticalPadding,
             horizontal: _horizontalPadding,
           ),
           child: _EcoScore(
-            ecoScore: ProductEcoScore.D,
+            ecoScore:
+                BlocProvider.of<ProductBlock>(context).state.product!.ecoScore,
           ),
         ),
       ]),
@@ -339,7 +349,7 @@ class _Scores extends StatelessWidget {
 }
 
 class _Nutriscore extends StatelessWidget {
-  final ProductNutriscore nutriscore;
+  final ProductNutriscore? nutriscore;
 
   const _Nutriscore({
     required this.nutriscore,
@@ -368,17 +378,18 @@ class _Nutriscore extends StatelessWidget {
 
   String _findAssetName() {
     return 'res/drawables/nutriscore_${switch (nutriscore) {
-      ProductNutriscore.A => 'A',
-      ProductNutriscore.B => 'B',
-      ProductNutriscore.C => 'C',
-      ProductNutriscore.D => 'D',
-      ProductNutriscore.E => 'E',
+      ProductNutriscore.A => 'a',
+      ProductNutriscore.B => 'b',
+      ProductNutriscore.C => 'c',
+      ProductNutriscore.D => 'd',
+      ProductNutriscore.E => 'e',
+      null => throw UnimplementedError(),
     }}.png';
   }
 }
 
 class _NovaGroup extends StatelessWidget {
-  final ProductNovaScore novaScore;
+  final ProductNovaScore? novaScore;
 
   const _NovaGroup({
     required this.novaScore,
@@ -426,7 +437,7 @@ class _NovaGroup extends StatelessWidget {
 }
 
 class _EcoScore extends StatelessWidget {
-  final ProductEcoScore ecoScore;
+  final ProductEcoScore? ecoScore;
 
   const _EcoScore({
     required this.ecoScore,
@@ -512,6 +523,8 @@ class _EcoScore extends StatelessWidget {
         return 'Impact environnemental élevé';
       case ProductEcoScore.E:
         return 'Impact environnemental très élevé';
+      case null:
+        throw Exception('Unknown ecoScore group!');
     }
   }
 }
@@ -521,19 +534,23 @@ class _Info extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         _ProductItemValue(
           label: 'Quantité',
-          value: '200g (égoutté 130g)',
+          value: BlocProvider.of<ProductBlock>(context).state.product!.quantity,
         ),
         _ProductItemValue(
-          label: 'Vendu',
-          value: 'France',
+          label: 'Vendu en',
+          value: BlocProvider.of<ProductBlock>(context)
+              .state
+              .product!
+              .sellingCountries
+              ?.join(", "),
           includeDivider: false,
         ),
-        SizedBox(
+        const SizedBox(
           height: 15.0,
         ),
         Row(
@@ -542,17 +559,25 @@ class _Info extends StatelessWidget {
               flex: 40,
               child: _ProductBubble(
                 label: 'Végétalien',
-                value: _ProductBubbleValue.on,
+                value: BlocProvider.of<ProductBlock>(context)
+                    .state
+                    .product!
+                    .analysis
+                    ?.vegan,
               ),
             ),
-            Spacer(
+            const Spacer(
               flex: 10,
             ),
             Expanded(
               flex: 40,
               child: _ProductBubble(
                 label: 'Végétarien',
-                value: _ProductBubbleValue.off,
+                value: BlocProvider.of<ProductBlock>(context)
+                    .state
+                    .product!
+                    .analysis
+                    ?.vegetarian,
               ),
             ),
           ],
@@ -564,7 +589,7 @@ class _Info extends StatelessWidget {
 
 class _ProductItemValue extends StatelessWidget {
   final String label;
-  final String value;
+  final String? value;
   final bool includeDivider;
 
   const _ProductItemValue({
@@ -592,7 +617,7 @@ class _ProductItemValue extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  value,
+                  value!,
                   textAlign: TextAlign.end,
                 ),
               ),
@@ -607,7 +632,7 @@ class _ProductItemValue extends StatelessWidget {
 
 class _ProductBubble extends StatelessWidget {
   final String label;
-  final _ProductBubbleValue value;
+  final AnalysisStatus? value;
 
   const _ProductBubble({required this.label, required this.value});
 
@@ -626,9 +651,7 @@ class _ProductBubble extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
-            value == _ProductBubbleValue.on
-                ? AppIcons.checkmark
-                : AppIcons.close,
+            value == AnalysisStatus.Yes ? AppIcons.checkmark : value == AnalysisStatus.No ? AppIcons.close : Icons.question_mark,
             color: AppColors.white,
           ),
           const SizedBox(
@@ -645,5 +668,3 @@ class _ProductBubble extends StatelessWidget {
     );
   }
 }
-
-enum _ProductBubbleValue { on, off }

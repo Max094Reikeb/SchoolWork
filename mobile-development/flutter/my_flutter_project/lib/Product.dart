@@ -5,6 +5,7 @@ class Product {
   final String? picture;
   final String? quantity;
   final List<String>? brands;
+  final List<String>? sellingCountries;
   final List<String>? manufacturingCountries;
   final ProductNutriscore? nutriScore;
   final ProductNovaScore? novaScore;
@@ -16,6 +17,7 @@ class Product {
   final NutrientLevels? nutrientLevels;
   final NutritionFacts? nutritionFacts;
   final bool? ingredientsFromPalmOil;
+  final ProductAnalysis? analysis;
 
   Product(
       {required this.barcode,
@@ -24,6 +26,7 @@ class Product {
       this.picture,
       this.quantity,
       this.brands,
+      this.sellingCountries,
       this.manufacturingCountries,
       this.nutriScore,
       this.novaScore,
@@ -34,7 +37,8 @@ class Product {
       this.additives,
       this.nutrientLevels,
       this.nutritionFacts,
-      this.ingredientsFromPalmOil});
+      this.ingredientsFromPalmOil,
+      this.analysis});
 }
 
 class NutritionFacts {
@@ -97,24 +101,12 @@ enum ProductNovaScore { Group1, Group2, Group3, Group4 }
 
 enum ProductEcoScore { A, B, C, D, E }
 
-Product generateFakeProduct() => Product(
-      barcode: '3083680085304',
-      name: 'Petits pois et carottes',
-      altName: 'Cassegrain',
-      picture:
-          'https://static.openfoodfacts.org/images/products/308/368/008/5304/front_fr.7.400.jpg',
-      quantity: '400 g (280 g net égoutté)',
-      brands: ['Cassegrain'],
-      manufacturingCountries: ['France', 'Japon', 'Suisse'],
-      nutriScore: ProductNutriscore.A,
-      novaScore: ProductNovaScore.Group1,
-      ecoScore: ProductEcoScore.A,
-      ingredients: [
-        'Petits pois 66%',
-        'eau',
-        'garniture 2,8% (salade, oignon grelot)',
-        'sucre',
-        'sel',
-        'arôme naturel'
-      ],
-    );
+class ProductAnalysis {
+  final AnalysisStatus? palmOil;
+  final AnalysisStatus? vegan;
+  final AnalysisStatus? vegetarian;
+
+  ProductAnalysis({this.palmOil, this.vegan, this.vegetarian});
+}
+
+enum AnalysisStatus { Yes, No, Maybe, Unknown }

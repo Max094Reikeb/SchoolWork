@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:my_flutter_project/app_colors.dart';
 import 'package:my_flutter_project/app_icons.dart';
 import 'package:my_flutter_project/complete_app.dart';
+import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
     GoRoute(
         path: '/product',
         builder: (BuildContext context, GoRouterState state) {
-          return const ProductInfo();
+          return ProductInfo(barcode: state.extra.toString());
         })
   ]);
 
@@ -108,8 +109,15 @@ class AddCardScreen extends StatelessWidget {
             ),
             SizedBox(height: height * 0.1),
             TextButton(
-              onPressed: () {
-                GoRouter.of(context).push('/product');
+              onPressed: () async {
+                var res = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SimpleBarcodeScannerPage(),
+                    ));
+                if (res is String && context.mounted) {
+                  GoRouter.of(context).push('/product', extra: res);
+                }
               },
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.blue,

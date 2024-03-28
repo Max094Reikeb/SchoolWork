@@ -7,12 +7,17 @@ import 'Product.dart';
 abstract class ProductEvent {}
 
 class ChargeEvent extends ProductEvent {
-  String barcode = "";
+  final String barcode;
+
+  ChargeEvent(this.barcode);
 }
 
 class ProductBlock extends Bloc<ProductEvent, ProductState> {
-  ProductBlock() : super(ProductState.initial()) {
+  final String barcode;
+
+  ProductBlock(this.barcode) : super(ProductState.initial()) {
     on<ChargeEvent>(_onCharge);
+    add(ChargeEvent(barcode));
   }
 
   Future<void> _onCharge(
