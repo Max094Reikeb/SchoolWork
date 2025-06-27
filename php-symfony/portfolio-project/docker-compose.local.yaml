@@ -1,0 +1,78 @@
+services:
+  mariadb:
+    image: mariadb:11.3
+    container_name: mariadb_local
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: portfolio
+      MARIADB_USER: symfony
+      MARIADB_PASSWORD: symfony
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - portfolio_network
+
+  phpMyAdmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin_local
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mariadb
+      PMA_USER: symfony
+      PMA_PASSWORD: symfony
+    depends_on:
+      - mariadb
+    networks:
+      - portfolio_network
+
+  symfony_portfolio:
+    build:
+      context: .
+      dockerfile: docker/Dockerfiles/Symfony/Dockerfile_symfony
+    container_name: symfony_portfolio_local
+    volumes:
+      - ./portfolio/back_end:/var/www/html/portfolio/back_end
+    expose:
+      - "9000"
+    networks:
+      - portfolio_network
+
+  react_portfolio:
+    build:
+      context: .
+      dockerfile: docker/Dockerfiles/React/Dockerfile_react
+    container_name: react_portfolio_local
+    volumes:
+      - ./portfolio/front_end:/app/portfolio/front_end/
+      - react_node_modules:/app/portfolio/front_end/portfolio_front_app/node_modules
+    ports:
+      - "3000:3000"
+    networks:
+      - portfolio_network
+
+  nginx_portfolio:
+    build:
+      context: .
+      dockerfile: docker/Dockerfiles/Nginx/Dockerfile_nginx
+    container_name: nginx_portfolio_local
+    volumes:
+      - ./portfolio/back_end:/var/www/html/portfolio/back_end
+      #- react_node_modules:/app/portfolio/front_end/portfolio_front_app/node_modules
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - symfony_portfolio
+      - react_portfolio
+    networks:
+      - portfolio_network
+
+volumes:
+  react_node_modules:
+  mariadb_data:
+networks:
+  portfolio_network:
+    driver: bridge

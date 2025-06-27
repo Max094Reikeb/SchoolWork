@@ -1,0 +1,8 @@
+FROM node:20-alpine
+
+ENV APP_DIR /app
+ENV TZ=Europe/Paris
+
+WORKDIR ${APP_DIR}/portfolio/front_end
+
+CMD ["tail", "-f", "/dev/null"]

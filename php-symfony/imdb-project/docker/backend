@@ -1,0 +1,32 @@
+FROM php:8.2-fpm
+
+ENV APP_DIR=/var/www/html
+ENV TZ=Europe/Paris
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+EXPOSE 9000
+
+RUN apt-get update && apt-get install -y \
+    zip git curl unzip libicu-dev libpq-dev libaio1 \
+    libzip-dev libonig-dev locales tzdata git \
+    && docker-php-ext-install intl pdo pdo_mysql opcache
+
+RUN curl -sS https://get.symfony.com/cli/installer | bash && \
+    mv /root/.symfony*/bin/symfony /usr/local/bin/symfony && \
+    rm -rf /root/.symfony*
+
+WORKDIR ${APP_DIR}
+
+COPY ./backend/skeleton/composer.json ./
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN composer install --no-scripts --no-interaction --prefer-dist --working-dir=./
+
+COPY ./backend/skeleton/ ./
+
+RUN chown -R www-data:www-data ${APP_DIR}
+
+RUN php bin/console cache:clear --no-warmup
+
+CMD ["php-fpm"]
