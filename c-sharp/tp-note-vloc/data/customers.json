@@ -1,0 +1,17 @@
+[
+  {
+    "Id": "76e78c12-df17-44c9-8f26-ce6b8ff7cf68",
+    "FullName": "Maxence Bekier",
+    "Type": "Premium"
+  },
+  {
+    "Id": "f5012aa9-9034-4550-9a26-8b4c4453d608",
+    "FullName": "Zouzou Bravo",
+    "Type": "Standard"
+  },
+  {
+    "Id": "359e42d2-d212-4433-87df-0a8d293d0cda",
+    "FullName": "Delta Bravo",
+    "Type": "Premium"
+  }
+]
